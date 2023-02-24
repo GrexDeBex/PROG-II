@@ -183,5 +183,14 @@ public class Kodu1a {
 
 
     public static void main(String[] args) {
+        System.out.println("5 suurimat algarvu ringi kui n = 1 000 000");
+        algarvuRingid5Suurimat(1000000);
+        System.out.println("\n5 suurimat algarvu ringi kui n = 100 000");
+        algarvuRingid5Suurimat(100000);
+
+        System.out.println("\nKogu algarvu ringide arv kui n = 1 000 000");
+        System.out.println(algarvuRingideArv(1000000));
+        System.out.println("\nKogu algarvu ringide arv kui n = 100 000");
+        System.out.println(algarvuRingideArv(100000));
     }
 }
