@@ -1,3 +1,5 @@
+package Tehtud;
+
 public class Kodu1b {
 	static void ruut(int n) {
 		for (int i = 0; i < n-1; i++) {

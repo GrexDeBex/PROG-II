@@ -4,14 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodu1a parandus">
+    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Organising">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Kodu1a.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tehtud/Kodu1a.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Kodu1b.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tehtud/Kodu1b.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Kodu2a.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kodu2a.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ilmAegTemp_2022.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ilmAegTemp_2022.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -32,6 +41,11 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ramma\Documents\Java\PROG-II" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -55,7 +69,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677248522978</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Organising">
+      <created>1677254685149</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1677254685149</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -72,6 +93,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Kodu1a parandus" />
-    <option name="LAST_COMMIT_MESSAGE" value="Kodu1a parandus" />
+    <MESSAGE value="Organising" />
+    <option name="LAST_COMMIT_MESSAGE" value="Organising" />
   </component>
 </project>
