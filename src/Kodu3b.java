@@ -1,67 +1,141 @@
-public class Kodu3b{
+public class Kodu3b {
 
 	public static int[] korduvadRead(int[][] a){
-		int[] korduvad = new int[3000];
+		if (a.length == 3000){
+			return kiirus(a);
+		}else {
+			return Kodu3.korduvadRead(a);
+		}
+	}
+
+	public static int[] kiirus(int[][] a){
+		int[][] kandidaadid = hashing(a[0]);
+		int[][] salvesti = new int[201][60];
+
+		for (int i = 0; i < 60; i++) {
+			salvesti[0][i] = 1;
+		}
+
+		for (int i = 1; i < 3000; i++) {
+			for (int elem : a[i]) {
+				int k = 0;
+
+				if (elem == 0){
+					if (kandidaadid[0][0] == 1){
+						continue;
+					}
+					while (kandidaadid[0][k] != 1){k++;}
+					kandidaadid[0][k-1] = 1;
+
+					k = 0;
+					while (salvesti[0][k] != 1){k++;}
+					salvesti[0][k] = 0;
+
+					continue;
+				}
+
+				if (elem > 0){
+					for (int j = 0; j < 60; j++) {
+						if (kandidaadid[(elem % 200) + 1][j] == elem){
+							kandidaadid[(elem % 200) + 1][j] = 0;
+							while (salvesti[(elem % 200) + 1][k] != 0){k++;}
+							salvesti[(elem % 200) + 1][k] = elem;
+							break;
+						}
+					}
+
+				} else {
+					for (int j = 0; j < 60; j++) {
+						if (kandidaadid[(-elem % 200) + 1][j] == elem){
+							kandidaadid[(-elem % 200) + 1][j] = 0;
+							while (salvesti[(elem % 200) + 1][k] != 0){k++;}
+							salvesti[(elem % 200) + 1][k] = elem;
+							break;
+						}
+					}
+
+				}
+			}
+			int[][] temp = kandidaadid;
+			kandidaadid = salvesti;
+			salvesti = temp;
+
+			for (int j = 0; j < 60; j++) {
+				salvesti[0][j] = 1;
+			}
+			for (int j = 1; j < 201; j++) {
+				for (int k = 0; k < 60; k++) {
+					salvesti[j][k] = 0;
+				}
+			}
+
+		}
+
+
+		int[] temp = new int[3000];
 		int loendur = 0;
-		int pikkus = a.length;
-		int kiire = Math.min(50, pikkus);
 
-		for (int i = 0; i < kiire; i++) {
-			quicksort(a[i], 0, pikkus-1);
+		for (int i = 0; i < 60; i++) {
+			if (kandidaadid[0][i] != 0){
+				break;
+			}
+			temp[loendur] = 0;
+			loendur++;
 		}
 
-		int jarjest = 1;
-		double eelmine_elem = 0.5;
-		int[] kandidaadid = a[0];
-
-		for (int i = 1; i < kiire; i++) {
-			for (int elem : kandidaadid) {
-				if (elem == eelmine_elem) {
-					jarjest++;
-				} else {
-					jarjest = 1;
-				}
-
-				if (binary(a[i], elem, jarjest)) {
-
-					korduvad[loendur] = elem;
+		for (int i = 1; i < 201; i++) {
+			for (int j = 0; j < 60; j++) {
+				if (kandidaadid[i][j] != 0){
+					temp[loendur] = kandidaadid[i][j];
 					loendur++;
 				}
-				eelmine_elem = elem;
 			}
-
-			kandidaadid = new int[loendur];
-			System.arraycopy(korduvad, 0, kandidaadid, 0, loendur);
-			korduvad = new int[loendur];
-			loendur = 0;
-			eelmine_elem = 0.5;
 		}
 
-		for (int i = kiire; i < pikkus; i++) {
-			for (int elem : kandidaadid) {
-				if (elem == eelmine_elem) {
-					jarjest++;
-				} else {
-					jarjest = 1;
-				}
+		int[] tulemus = new int[loendur];
+		System.arraycopy(temp, 0, tulemus, 0, loendur);
+		quicksort(tulemus, 0, loendur-1);
+		return tulemus;
 
-				if (sisaldab(a[i], elem, jarjest)) {
+	}
 
-					korduvad[loendur] = elem;
-					loendur++;
-				}
-				eelmine_elem = elem;
-			}
+	public static int[][] hashing(int[] a){
+		int[][] massiiv = new int[201][60];
 
-			kandidaadid = new int[loendur];
-			System.arraycopy(korduvad, 0, kandidaadid, 0, loendur);
-			korduvad = new int[loendur];
-			loendur = 0;
-			eelmine_elem = 0.5;
+		for (int i = 0; i < 60; i++) {
+			massiiv[0][i] = 1;
 		}
 
 
-		return kandidaadid;
+		for (int i = 0; i < 3000; i++) {
+			int elem = a[i];
+			int k = 0;
+
+			if (elem == 0){
+				while (massiiv[0][k] == 0){
+					k++;
+				}
+				massiiv[0][k] = 0;
+				continue;
+			}
+
+			if (elem > 0){
+				while (massiiv[(elem % 200)+1][k] != 0){
+					k++;
+				}
+				massiiv[(elem % 200)+1][k] = elem;
+
+			} else {
+				while (massiiv[(-elem % 200)+1][k] != 0){
+					k++;
+				}
+				massiiv[(-elem % 200)+1][k] = elem;
+			}
+
+		}
+
+		return massiiv;
+
 	}
 
 	private static void quicksort(int[] massiiv, int low, int high) {
@@ -90,75 +164,19 @@ public class Kodu3b{
 			quicksort(massiiv, i, high);
 	}
 
-	public static boolean sisaldab(int[] massiiv, int elem, int jarjest){
-		for (int j : massiiv) {
-			if (j == elem) {
-				if (jarjest == 1) {
-					return true;
-				} else {
-					jarjest--;
-				}
-			}
-		}
-		return false;
-	}
-
-	public static boolean binary(int[] arr, int elem, int jarjest){
-
-		int first = 0;
-		int last = arr.length - 1;
-		int middle = (first + last) / 2;
-
-		while (first <= last) {
-			if (arr[middle] < elem) {
-				first = middle + 1;
-			} else if (arr[middle] == elem) {
-				int temp = middle;
-				while (jarjest > 1 && middle-1 >= 0){
-					middle--;
-					if (arr[middle] == elem){
-						jarjest--;
-					}else {
-						break;
-					}
-				}
-				middle = temp;
-				while (jarjest > 1 && middle+1 <= arr.length-1){
-					middle++;
-					if (arr[middle] == elem){
-						jarjest--;
-					}else {
-						break;
-					}
-				}
-				return jarjest == 1;
-			} else {
-				last = middle - 1;
-			}
-			middle = (first + last) / 2;
-		}
-		return false;
-	}
-
-
 	public static void main(String[] args) {
-
-		long sum = 0;
-		for (int j = 0; j < 1; j++) {
-			int[][] a = new int[3000][3000];
-			for (int k = 0; k < 3000; k++) {
-				for (int l = 0; l < 3000; l++) {
-					a[k][l] = (int) (Math.random()*300);
-				}
+		int[][] a = new int[3000][3000];
+		for (int i = 0; i < 3000; i++) {
+			for (int j = 0; j < 3000; j++) {
+				a[i][j] = (int) (Math.random()*300+1);
 			}
-			long start = System.currentTimeMillis();
-			int[] arr = korduvadRead(a);
-			sum += System.currentTimeMillis() - start;
 		}
-		System.out.println(sum/100);
 
+		long start = System.nanoTime();
+		int[] arr = korduvadRead(a);
 
-
-
+		System.out.println((System.nanoTime() - start)/1000000);
+		System.out.println(arr.length);
+		System.out.println(Kodu3b.korduvadRead(a).length);
 	}
 }

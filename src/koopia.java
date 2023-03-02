@@ -4,44 +4,17 @@ public class koopia{
 
 	public static int[] korduvadRead(int[][] a){
 		int pikkus = a.length;
-		quicksort(a[0], 0, pikkus-1);
 
-		int eelmine_elem = -1;
-		int indeks = 0;
-		int[] temp = new int[pikkus];
-
-		for (int i = 0; i < pikkus; i++) {
-			int elem = a[0][i];
-			if (elem != eelmine_elem){
-				temp[indeks] = elem;
-				eelmine_elem = elem;
-				indeks++;
-			}
-		}
-
-
-
-		int[] arr = new int[indeks];
-		System.arraycopy(temp, 0, arr, 0, indeks);
-
-
-		int[] korduvad = new int[9000000];
-		indeks = 0;
 
 		for (int i = 1; i < pikkus; i++) {
 			for (int j = 0; j < pikkus; j++) {
-				int elem = a[i][j];
 
-				if (sisaldab(arr, elem)){
-					korduvad[indeks] = elem;
-					indeks++;
-				}
 			}
 		}
 
 
 
-		return arr;
+		return a[0];
 	}
 
 	private static void quicksort(int[] massiiv, int low, int high) {
