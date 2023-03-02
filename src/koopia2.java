@@ -1,45 +1,25 @@
-import java.util.Arrays;
 
-public class koopia{
+
+public class koopia2 {
 
 	public static int[] korduvadRead(int[][] a){
 		int pikkus = a.length;
-		quicksort(a[0], 0, pikkus-1);
 
-		int eelmine_elem = -1;
-		int indeks = 0;
-		int[] temp = new int[pikkus];
-
+		int max = 0;
 		for (int i = 0; i < pikkus; i++) {
-			int elem = a[0][i];
-			if (elem != eelmine_elem){
-				temp[indeks] = elem;
-				eelmine_elem = elem;
-				indeks++;
+			if (max < a[0][i]) {
+				max = a[0][i];
 			}
 		}
 
+		int[] arr = new int[max];
 
-
-		int[] arr = new int[indeks];
-		System.arraycopy(temp, 0, arr, 0, indeks);
-
-
-		int[] korduvad = new int[9000000];
-		indeks = 0;
-
-		for (int i = 1; i < pikkus; i++) {
-			for (int j = 0; j < pikkus; j++) {
-				int elem = a[i][j];
-
-				if (sisaldab(arr, elem)){
-					korduvad[indeks] = elem;
-					indeks++;
-				}
-			}
-		}
-
-
+//		for (int i = 0; i < pikkus; i++) {
+//			for (int j = 0; j < pikkus; j++) {
+//				arr[a[i][j]-1]++;
+//			}
+//		}
+//
 
 		return arr;
 	}
@@ -117,6 +97,5 @@ public class koopia{
 
 		int[] arr = korduvadRead(a);
 		System.out.println((System.nanoTime() - start)/1000000);
-		System.out.println();
 	}
 }

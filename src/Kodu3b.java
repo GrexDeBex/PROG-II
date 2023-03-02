@@ -1,53 +1,67 @@
-import java.util.Arrays;
-
 public class Kodu3b{
 
 	public static int[] korduvadRead(int[][] a){
 		int[] korduvad = new int[3000];
 		int loendur = 0;
 		int pikkus = a.length;
+		int kiire = Math.min(50, pikkus);
 
-
-		quicksort(a[0], 0, pikkus-1);
-
-
-		boolean korduv;
-		int elem;
-		int jarjest = 1;
-		int eelmine_elem = -1;
-
-
-		for (int i = 0; i < pikkus; i++) {
-			elem = a[0][i];
-			korduv = true;
-
-			if (elem == eelmine_elem){
-				jarjest++;
-			}else{
-				jarjest = 1;
-			}
-
-			for (int j = 1; j < pikkus; j++) {
-				if (eiSisalda(a[j], elem, jarjest)){
-					korduv = false;
-					break;
-				}
-			}
-
-
-			if (korduv){
-				korduvad[loendur] = elem;
-				loendur++;
-			}
-
-			eelmine_elem = elem;
+		for (int i = 0; i < kiire; i++) {
+			quicksort(a[i], 0, pikkus-1);
 		}
 
-		int[] tulemus = new int[loendur];
+		int jarjest = 1;
+		double eelmine_elem = 0.5;
+		int[] kandidaadid = a[0];
 
-		System.arraycopy(korduvad, 0, tulemus, 0, loendur);
+		for (int i = 1; i < kiire; i++) {
+			for (int elem : kandidaadid) {
+				if (elem == eelmine_elem) {
+					jarjest++;
+				} else {
+					jarjest = 1;
+				}
 
-		return tulemus;
+				if (binary(a[i], elem, jarjest)) {
+
+					korduvad[loendur] = elem;
+					loendur++;
+				}
+				eelmine_elem = elem;
+			}
+
+			kandidaadid = new int[loendur];
+			System.arraycopy(korduvad, 0, kandidaadid, 0, loendur);
+			korduvad = new int[loendur];
+			loendur = 0;
+			eelmine_elem = 0.5;
+		}
+
+		for (int i = kiire; i < pikkus; i++) {
+			for (int elem : kandidaadid) {
+				if (elem == eelmine_elem) {
+					jarjest++;
+				} else {
+					jarjest = 1;
+				}
+
+				if (sisaldab(a[i], elem, jarjest)) {
+
+					korduvad[loendur] = elem;
+					loendur++;
+				}
+				eelmine_elem = elem;
+			}
+
+			kandidaadid = new int[loendur];
+			System.arraycopy(korduvad, 0, kandidaadid, 0, loendur);
+			korduvad = new int[loendur];
+			loendur = 0;
+			eelmine_elem = 0.5;
+		}
+
+
+		return kandidaadid;
 	}
 
 	private static void quicksort(int[] massiiv, int low, int high) {
@@ -76,32 +90,75 @@ public class Kodu3b{
 			quicksort(massiiv, i, high);
 	}
 
-	public static boolean eiSisalda(int[] massiiv, int elem, int jarjest){
-		int pikkus = massiiv.length;
-		for (int i = 0; i < pikkus; i++) {
-			if (massiiv[i] == elem){
-				if (jarjest == 1){
-					return false;
-
-				}else{
+	public static boolean sisaldab(int[] massiiv, int elem, int jarjest){
+		for (int j : massiiv) {
+			if (j == elem) {
+				if (jarjest == 1) {
+					return true;
+				} else {
 					jarjest--;
 				}
 			}
 		}
-		return true;
+		return false;
+	}
+
+	public static boolean binary(int[] arr, int elem, int jarjest){
+
+		int first = 0;
+		int last = arr.length - 1;
+		int middle = (first + last) / 2;
+
+		while (first <= last) {
+			if (arr[middle] < elem) {
+				first = middle + 1;
+			} else if (arr[middle] == elem) {
+				int temp = middle;
+				while (jarjest > 1 && middle-1 >= 0){
+					middle--;
+					if (arr[middle] == elem){
+						jarjest--;
+					}else {
+						break;
+					}
+				}
+				middle = temp;
+				while (jarjest > 1 && middle+1 <= arr.length-1){
+					middle++;
+					if (arr[middle] == elem){
+						jarjest--;
+					}else {
+						break;
+					}
+				}
+				return jarjest == 1;
+			} else {
+				last = middle - 1;
+			}
+			middle = (first + last) / 2;
+		}
+		return false;
 	}
 
 
 	public static void main(String[] args) {
-		int[][] a = new int[3000][3000];
-		for (int i = 0; i < 3000; i++) {
-			for (int j = 0; j < 3000; j++) {
-				a[i][j] = (int) (Math.random()*300);
+
+		long sum = 0;
+		for (int j = 0; j < 1; j++) {
+			int[][] a = new int[3000][3000];
+			for (int k = 0; k < 3000; k++) {
+				for (int l = 0; l < 3000; l++) {
+					a[k][l] = (int) (Math.random()*300);
+				}
 			}
+			long start = System.currentTimeMillis();
+			int[] arr = korduvadRead(a);
+			sum += System.currentTimeMillis() - start;
 		}
-		long start = System.nanoTime();
-		int[] arr = korduvadRead(a);
-		System.out.println(System.nanoTime() - start);
+		System.out.println(sum/100);
+
+
+
 
 	}
 }
