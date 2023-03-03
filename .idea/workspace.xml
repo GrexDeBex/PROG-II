@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="kodu 3b 69mm">
-      <change afterPath="$PROJECT_DIR$/src/Kodu4a.java" afterDir="false" />
+    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodu 4a 1s">
+      <change afterPath="$PROJECT_DIR$/src/Kodu4akoopia.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Kodu3b.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tehtud/Kodu3b.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/aeglane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tehtud/aeglane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Kodu4a.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kodu4a.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +117,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677797611733</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Kodu 4a 1s">
+      <created>1677810105115</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1677810105115</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -141,6 +147,7 @@
     <MESSAGE value="kodu 3b katse" />
     <MESSAGE value="kodu 3b 190mm" />
     <MESSAGE value="kodu 3b 69mm" />
-    <option name="LAST_COMMIT_MESSAGE" value="kodu 3b 69mm" />
+    <MESSAGE value="Kodu 4a 1s" />
+    <option name="LAST_COMMIT_MESSAGE" value="Kodu 4a 1s" />
   </component>
 </project>

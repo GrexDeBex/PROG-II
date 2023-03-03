@@ -1,6 +1,4 @@
-import java.util.Arrays;
-
-public class Kodu4a{
+public class Kodu4akoopia {
 
 	public static int[] pikendatudDiagonaal(int[][] a) {
 		int kõrgus = a.length;
@@ -40,54 +38,51 @@ public class Kodu4a{
 	}
 
 	public static int ruutÜhtedest(boolean[][] maatriks){
-		if (maatriks.length != 1000){
-			return Kodu4akoopia.ruutÜhtedest(maatriks);
-		}
+		int massiiviPikkus = maatriks.length;
 
-		int[] reaPikkused = new int[1000];
+		long s = System.currentTimeMillis();
 
-		int ruuduPikkus = suurimRuut(maatriks, reaPikkused);
+		int ruuduPikkus = suurimRuut(maatriks);
+
+
+		System.out.println(System.currentTimeMillis() - s);
 		for (; ruuduPikkus > 0; ruuduPikkus--) {
+			int võimalusi = massiiviPikkus-ruuduPikkus+1;
 
-			for (int rida = 0; rida < 1001 - ruuduPikkus; rida++) {
-				if (reaPikkused[rida] < ruuduPikkus){
-					continue;
-				}
-				int loendur = 0;
+			for (int iNurk = 0; iNurk < võimalusi; iNurk++) {
+				for (int jNurk = 0; jNurk < võimalusi; jNurk++) {
 
-				for (int elem = 0; elem < 1000; elem++) {
-					if (maatriks[rida][elem]){
-						loendur++;
-					}else {
-						loendur = 0;
-					}
-					if (loendur == ruuduPikkus){
-						if (kontrolliRuutu(ruuduPikkus, rida, elem-ruuduPikkus+1, maatriks)){
-							return ruuduPikkus;
-						}
-						loendur--;
+					if (kontrolliRuutu(ruuduPikkus, iNurk, jNurk, maatriks)){
+						return ruuduPikkus;
 					}
 				}
 			}
 		}
 
-
-
 		return 0;
 	}
 
-	public static int suurimRuut(boolean[][] maatriks, int[] reaPikkused){
+	public static int suurimRuut(boolean[][] maatriks){
+		int pikkus = maatriks.length;
 		int max1 = 0;
 		int max2 = 0;
 		int max3 = 0;
 		int max4 = 0;
 
+		if (pikkus == 1){
+			if (maatriks[0][0]){
+				return 1;
+			}else {
+				return 0;
+			}
+		}
 
-		for (int i = 0; i < 1000; i++) {
+
+		for (boolean[] rida : maatriks) {
 			int loendur = 0;
 			int max = 0;
 
-			for (boolean elem : maatriks[i]) {
+			for (boolean elem : rida) {
 				if (elem) {
 					loendur++;
 
@@ -103,8 +98,6 @@ public class Kodu4a{
 				max = loendur;
 			}
 
-			reaPikkused[i] = max;
-
 			if (max > max1) {
 				max2 = max1;
 				max1 = max;
@@ -114,11 +107,11 @@ public class Kodu4a{
 			}
 		}
 
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < pikkus; i++) {
 			int loendur = 0;
 			int max = 0;
 
-			for (int j = 0; j < 1000; j++) {
+			for (int j = 0; j < pikkus; j++) {
 				if (maatriks[j][i]) {
 					loendur++;
 
@@ -152,26 +145,41 @@ public class Kodu4a{
 	}
 
 	public static boolean kontrolliRuutu(int ruuduPikkus, int iNurk, int jNurk, boolean[][] maatriks){
-
-		for (int l = 1; l < ruuduPikkus ; l++) {
-			if (!maatriks[iNurk+l][jNurk]){
-				return false;
+		for (int k = 0; k < 2; k++) {
+			for (int l = ruuduPikkus-1; l >= k; l--) {
+				switch (k) {
+					case 0:
+						if (!maatriks[iNurk+l][jNurk]){
+							return false;
+						}
+						break;
+					case 1:
+						if (!maatriks[iNurk][jNurk+l]){
+							return false;
+						}
+						break;
+				}
 			}
 		}
 
 		iNurk = iNurk + ruuduPikkus - 1;
 		jNurk = jNurk + ruuduPikkus - 1;
-
-		if (!maatriks[iNurk][jNurk]){
-			return false;
-		}
-
-		for (int l = 1; l < ruuduPikkus-1 ; l++) {
-			if (!maatriks[iNurk-l][jNurk] || !maatriks[iNurk][jNurk-l]){
-				return false;
+		for (int k = 0; k < 2; k++) {
+			for (int l = ruuduPikkus-2; l >= k; l--) {
+				switch (k) {
+					case 0:
+						if (!maatriks[iNurk-l][jNurk]){
+							return false;
+						}
+						break;
+					case 1:
+						if (!maatriks[iNurk][jNurk-l]){
+							return false;
+						}
+						break;
+				}
 			}
 		}
-
 
 		return true;
 	}
@@ -181,7 +189,8 @@ public class Kodu4a{
 
 		for (int i = 0; i < 1000; i++) {
 			for (int j = 0; j < 1000; j++) {
-				arr[i][j] = false;
+				double nr = Math.random();
+				arr[i][j] = nr < 0.5;
 			}
 		}
 
