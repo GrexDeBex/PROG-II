@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodu 4a 1s">
-      <change afterPath="$PROJECT_DIR$/src/Kodu4akoopia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Kodu4a.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kodu4a.java" afterDir="false" />
-    </list>
+    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodu 4a 30mm" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -124,7 +120,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677810105115</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Kodu 4a 30mm">
+      <created>1677860770566</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1677860770566</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -148,6 +151,7 @@
     <MESSAGE value="kodu 3b 190mm" />
     <MESSAGE value="kodu 3b 69mm" />
     <MESSAGE value="Kodu 4a 1s" />
-    <option name="LAST_COMMIT_MESSAGE" value="Kodu 4a 1s" />
+    <MESSAGE value="Kodu 4a 30mm" />
+    <option name="LAST_COMMIT_MESSAGE" value="Kodu 4a 30mm" />
   </component>
 </project>

@@ -44,13 +44,12 @@ public class Kodu4a{
 			return Kodu4akoopia.ruutÜhtedest(maatriks);
 		}
 
-		int[] reaPikkused = new int[1000];
+		int[] reaPikkused = suurimadRead(maatriks);
 
-		int ruuduPikkus = suurimRuut(maatriks, reaPikkused);
-		for (; ruuduPikkus > 0; ruuduPikkus--) {
+		for (int külg = 1000; külg > 0; külg--) {
 
-			for (int rida = 0; rida < 1001 - ruuduPikkus; rida++) {
-				if (reaPikkused[rida] < ruuduPikkus){
+			for (int rida = 0; rida < 1001 - külg; rida++) {
+				if (reaPikkused[rida] < külg){
 					continue;
 				}
 				int loendur = 0;
@@ -61,9 +60,9 @@ public class Kodu4a{
 					}else {
 						loendur = 0;
 					}
-					if (loendur == ruuduPikkus){
-						if (kontrolliRuutu(ruuduPikkus, rida, elem-ruuduPikkus+1, maatriks)){
-							return ruuduPikkus;
+					if (loendur == külg){
+						if (kontrolliRuutu(külg, rida, elem-külg+1, maatriks)){
+							return külg;
 						}
 						loendur--;
 					}
@@ -76,12 +75,8 @@ public class Kodu4a{
 		return 0;
 	}
 
-	public static int suurimRuut(boolean[][] maatriks, int[] reaPikkused){
-		int max1 = 0;
-		int max2 = 0;
-		int max3 = 0;
-		int max4 = 0;
-
+	public static int[] suurimadRead(boolean[][] maatriks){
+		int[] reaPikkused = new int[1000];
 
 		for (int i = 0; i < 1000; i++) {
 			int loendur = 0;
@@ -98,57 +93,13 @@ public class Kodu4a{
 					loendur = 0;
 				}
 			}
-
 			if (loendur > max) {
 				max = loendur;
 			}
 
 			reaPikkused[i] = max;
-
-			if (max > max1) {
-				max2 = max1;
-				max1 = max;
-
-			} else if (max > max2) {
-				max2 = max;
-			}
 		}
-
-		for (int i = 0; i < 1000; i++) {
-			int loendur = 0;
-			int max = 0;
-
-			for (int j = 0; j < 1000; j++) {
-				if (maatriks[j][i]) {
-					loendur++;
-
-				} else {
-					if (loendur > max) {
-						max = loendur;
-					}
-					loendur = 0;
-				}
-			}
-
-			if (loendur > max) {
-				max = loendur;
-			}
-
-			if (max > max3) {
-				max4 = max3;
-				max3 = max;
-				if (max4 >= max2){
-					break;
-				}
-
-			} else if (max > max4) {
-				max4 = max;
-				if (max4 >= max2){
-					break;
-				}
-			}
-		}
-		return Math.min(max2, max4);
+		return reaPikkused;
 	}
 
 	public static boolean kontrolliRuutu(int ruuduPikkus, int iNurk, int jNurk, boolean[][] maatriks){
