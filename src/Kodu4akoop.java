@@ -1,4 +1,4 @@
-public class Kodu4a{
+public class Kodu4akoop {
 
 	public static int[] pikendatudDiagonaal(int[][] a) {
 		int kõrgus = a.length;
@@ -42,10 +42,6 @@ public class Kodu4a{
 			return Kodu4aAeglane.ruutÜhtedest(maatriks);
 		}
 
-//		for (int i = 0; i < 70000; i++) {
-//			System.out.println(i);
-//		}
-
 
 		int[] reaPikkused = suurimadRead(maatriks);
 
@@ -56,59 +52,42 @@ public class Kodu4a{
 			}
 		}
 
-
 		for (int külg = max; külg > 0; külg--) {
+
 			for (int rida1 = 0; rida1 < 1001 - külg; rida1++) {
-				int rida2 = rida1 + külg-1;
-				if (reaPikkused[rida1] < külg || reaPikkused[rida2] < külg){
+				if (reaPikkused[rida1] < külg || reaPikkused[rida1 + külg-1] < külg){
 					continue;
 				}
-
+				int loendur = 0;
 
 				for (int elem = 0; elem < 1000; elem++) {
-
-					if (maatriks[rida1][elem] && maatriks[rida2][elem]){
-
-						int i = elem+külg-1;
-						if (i > 999){
+					if (maatriks[rida1][elem]){
+						loendur++;
+					}else {
+						if (elem > 1000-külg){
 							break;
 						}
-
-						for (; i > elem; i--) {
-							if (!maatriks[rida1][i] || !maatriks[rida2][i]){
-								break;
-							}
+						loendur = 0;
+					}
+					if (loendur == külg){
+						if (kontrolliRuutu(külg, rida1, elem-külg+1, maatriks)){
+							return külg;
 						}
 
-
-						if (i == elem){
-							if (kontrolliRuutu(külg, rida1, elem, maatriks)){
-								return külg;
-							}
-							continue;
-						}
-						elem = i;
+						loendur--;
 					}
-
-					if (elem > 999-külg){
-						break;
-					}
-					if (!maatriks[rida1][elem+külg] || !maatriks[rida2][elem+külg]){
-						elem += külg;
-					}
-
-
 				}
 			}
 		}
 
 
+
 		return 0;
 	}
 
-
 	public static int[] suurimadRead(boolean[][] maatriks){
 		int[] reaPikkused = new int[1000];
+
 		for (int i = 0; i < 1000; i++) {
 			int loendur = 0;
 			int max = 0;
@@ -127,9 +106,9 @@ public class Kodu4a{
 			if (loendur > max) {
 				max = loendur;
 			}
+
 			reaPikkused[i] = max;
 		}
-
 		return reaPikkused;
 	}
 
@@ -144,11 +123,16 @@ public class Kodu4a{
 		iNurk = iNurk + ruuduPikkus - 1;
 		jNurk = jNurk + ruuduPikkus - 1;
 
+		if (!maatriks[iNurk][jNurk]){
+			return false;
+		}
+
 		for (int l = 1; l < ruuduPikkus-1 ; l++) {
-			if (!maatriks[iNurk-l][jNurk]){
+			if (!maatriks[iNurk-l][jNurk] || !maatriks[iNurk][jNurk-l]){
 				return false;
 			}
 		}
+
 
 		return true;
 	}
@@ -163,12 +147,12 @@ public class Kodu4a{
 			}
 		}
 
-//		for (int i = 0; i < 1000; i++) {
-//			arr[0][i] = true;
-//			arr[i][0] = true;
-//			arr[1][i] = true;
-//			arr[i][1] = true;
-//		}
+		for (int i = 0; i < 1000; i++) {
+			arr[0][i] = true;
+			arr[i][0] = true;
+			arr[1][i] = true;
+			arr[i][1] = true;
+		}
 
 
 		long start = System.currentTimeMillis();

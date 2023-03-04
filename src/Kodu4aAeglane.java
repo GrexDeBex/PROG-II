@@ -1,4 +1,4 @@
-public class Kodu4akoopia {
+public class Kodu4aAeglane {
 
 	public static int[] pikendatudDiagonaal(int[][] a) {
 		int kõrgus = a.length;
@@ -40,12 +40,18 @@ public class Kodu4akoopia {
 	public static int ruutÜhtedest(boolean[][] maatriks){
 		int massiiviPikkus = maatriks.length;
 
-		long s = System.currentTimeMillis();
+		if (massiiviPikkus == 1){
+			if (maatriks[0][0]){
+				return 1;
+			}else {
+				return 0;
+			}
+		}
+
 
 		int ruuduPikkus = suurimRuut(maatriks);
 
 
-		System.out.println(System.currentTimeMillis() - s);
 		for (; ruuduPikkus > 0; ruuduPikkus--) {
 			int võimalusi = massiiviPikkus-ruuduPikkus+1;
 
@@ -69,13 +75,6 @@ public class Kodu4akoopia {
 		int max3 = 0;
 		int max4 = 0;
 
-		if (pikkus == 1){
-			if (maatriks[0][0]){
-				return 1;
-			}else {
-				return 0;
-			}
-		}
 
 
 		for (boolean[] rida : maatriks) {
