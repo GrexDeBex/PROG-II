@@ -37,102 +37,114 @@ public class Kodu4akoop {
 		return tulemus;
 	}
 
-	public static int ruutÜhtedest(boolean[][] maatriks){
-		if (maatriks.length != 1000){
+	public static int ruutÜhtedest(boolean[][] maatriks) {
+		if (maatriks.length != 1000) {
 			return Kodu4aAeglane.ruutÜhtedest(maatriks);
 		}
 
-
-		int[] reaPikkused = suurimadRead(maatriks);
-
-		int max = 0;
-		for (int i = 0; i < 1000; i++) {
-			if (reaPikkused[i] > max){
-				max = reaPikkused[i];
-			}
+		for (int i = 0; i < 80000; i++) {
+			System.out.println(i);
 		}
 
-		for (int külg = max; külg > 0; külg--) {
+
+		int[] reaPikkused = new int[1000];
+		int külg = suurimadRead(maatriks, reaPikkused);
+
+		for (; külg > 0; külg--) {
 
 			for (int rida1 = 0; rida1 < 1001 - külg; rida1++) {
-				if (reaPikkused[rida1] < külg || reaPikkused[rida1 + külg-1] < külg){
+
+				int rida2 = rida1 + külg - 1;
+				if (reaPikkused[rida1] < külg || reaPikkused[rida2] < külg) {
 					continue;
 				}
-				int loendur = 0;
 
-				for (int elem = 0; elem < 1000; elem++) {
-					if (maatriks[rida1][elem]){
-						loendur++;
-					}else {
-						if (elem > 1000-külg){
-							break;
+
+
+
+				reaLugemine:
+				for (int elem = 0; elem < 1000 - külg; elem++) {
+					while ((!maatriks[rida1][elem] || !maatriks[rida2][elem])) {
+						if (elem > 999 - külg) {
+							break reaLugemine;
 						}
-						loendur = 0;
+						if (!maatriks[rida1][elem + külg] || !maatriks[rida2][elem + külg]) {
+							elem += külg;
+
+						} else { // Otsing liigub tagasi
+							elem++;
+
+						}
+
 					}
-					if (loendur == külg){
-						if (kontrolliRuutu(külg, rida1, elem-külg+1, maatriks)){
-							return külg;
-						}
 
-						loendur--;
+					int i = elem + külg - 1;
+
+
+					for (; i > elem; i--) {
+						if (!maatriks[rida1][i] || !maatriks[rida2][i]) { // jätkab otsinugt edasi
+							elem = i;
+							continue reaLugemine;
+						}
+					}
+
+					if (kontrolliRuutu(külg, rida1, elem, maatriks)) {
+						return külg;
 					}
 				}
 			}
 		}
-
 
 
 		return 0;
 	}
 
-	public static int[] suurimadRead(boolean[][] maatriks){
-		int[] reaPikkused = new int[1000];
 
-		for (int i = 0; i < 1000; i++) {
+	public static int suurimadRead(boolean[][] maatriks, int[] reaPikkused) {
+		int ridadeMax = 0;
+
+		for (int rida = 0; rida < 1000; rida++) {
 			int loendur = 0;
 			int max = 0;
 
-			for (int j = 0; j < 1000; j++) {
-				if (maatriks[i][j]) {
+			for (int elem = 0; elem < 1000; elem++) {
+				if (maatriks[rida][elem]) {    // Kontrollib tagurpidi
 					loendur++;
 
 				} else {
 					if (loendur > max) {
 						max = loendur;
 					}
+					if (elem > 998 - max) {
+						break;
+					}
+					if (!maatriks[rida][elem + max + 1]) {
+						elem += max + 1;
+					}
+
 					loendur = 0;
 				}
 			}
 			if (loendur > max) {
 				max = loendur;
 			}
+			reaPikkused[rida] = max;
 
-			reaPikkused[i] = max;
+			if (max > ridadeMax) {
+				ridadeMax = max;
+			}
 		}
-		return reaPikkused;
+
+		return ridadeMax;
 	}
 
-	public static boolean kontrolliRuutu(int ruuduPikkus, int iNurk, int jNurk, boolean[][] maatriks){
-
-		for (int l = 1; l < ruuduPikkus ; l++) {
-			if (!maatriks[iNurk+l][jNurk]){
+	public static boolean kontrolliRuutu(int ruuduPikkus, int rida1, int elem1, boolean[][] maatriks) {
+		int elem2 = elem1 + ruuduPikkus - 1;
+		for (int l = 1; l < ruuduPikkus - 1; l++) {
+			if (!maatriks[rida1 + l][elem1] || !maatriks[rida1 + l][elem2]) {
 				return false;
 			}
 		}
-
-		iNurk = iNurk + ruuduPikkus - 1;
-		jNurk = jNurk + ruuduPikkus - 1;
-
-		if (!maatriks[iNurk][jNurk]){
-			return false;
-		}
-
-		for (int l = 1; l < ruuduPikkus-1 ; l++) {
-			if (!maatriks[iNurk-l][jNurk] || !maatriks[iNurk][jNurk-l]){
-				return false;
-			}
-		}
-
 
 		return true;
 	}
@@ -147,12 +159,12 @@ public class Kodu4akoop {
 			}
 		}
 
-		for (int i = 0; i < 1000; i++) {
-			arr[0][i] = true;
-			arr[i][0] = true;
-			arr[1][i] = true;
-			arr[i][1] = true;
-		}
+//		for (int i = 0; i < 1000; i++) {
+//			arr[0][i] = true;
+//			arr[i][0] = true;
+//			arr[1][i] = true;
+//			arr[i][1] = true;
+//		}
 
 
 		long start = System.currentTimeMillis();
