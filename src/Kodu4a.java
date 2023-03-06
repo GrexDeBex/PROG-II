@@ -61,14 +61,10 @@ public class Kodu4a {
 					continue;
 				}
 
-
-
-
 				reaLugemine:
 				for (int elem = 0; elem < 1000 - külg; elem++) {
 
-					while ((!maatriks[rida1][elem] || !maatriks[rida2][elem])) {
-
+					while (!maatriks[rida1][elem] || !maatriks[rida2][elem]) {
 						if (elem > 999 - külg) {
 							break reaLugemine;
 						}
@@ -77,17 +73,16 @@ public class Kodu4a {
 
 						} else { // Otsing liigub tagasi
 							elem++;
-
 						}
 
 					}
+
 
 					for (int i = elem + külg - 1; i > elem; i--) {
 						if (!maatriks[rida1][i] || !maatriks[rida2][i]) { // jätkab otsinugt edasi
 							elem = i;
 							continue reaLugemine;
 						}
-
 					}
 
 					if (kontrolliRuutu(külg, rida1, elem, maatriks)) {
@@ -156,7 +151,7 @@ public class Kodu4a {
 	public static void main(String[] args) {
 		int n = 0;
 		long start = System.currentTimeMillis();
-		for (int k = 0; k < 1; k++) {
+		for (int k = 0; k < 100; k++) {
 			boolean[][] arr = new boolean[1000][1000];
 
 			for (int i = 0; i < 1000; i++) {
@@ -176,7 +171,7 @@ public class Kodu4a {
 			n = ruutÜhtedest(arr);
 		}
 		System.out.println(n);
-		System.out.println((double) (System.currentTimeMillis()-start) / 1);
+		System.out.println((double) (System.currentTimeMillis()-start) / 100);
 
 
 
