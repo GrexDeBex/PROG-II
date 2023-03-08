@@ -1,33 +1,52 @@
+/***********************************
+ * Programmeerimine II. LTAT.03.007
+ * 2022/2023 kevadsemester
+ *
+ * Kodutöö nr 4a
+ * Teema: Tsükklid, järjendid
+ *
+ * Autor: Gregor Rämmal
+ *
+ **********************************/
+
+
 public class Kodu4akoop {
 
+	/**
+	 * Leiab arvude diagonaalil olevad arvud alates indeksist 1,1 kuni diagonaali uuesti vasaku küljeni jõudmiseni
+	 * arvestades peegeldumisega maatriksi külgedelt.
+	 *
+	 * @param a Antud maatriks
+	 * @return Arvude massiiv sellises järjestuses nagu nad diagonaalil esinevad.
+	 */
 	public static int[] pikendatudDiagonaal(int[][] a) {
-		int kõrgus = a.length;
-		int laius = a[0].length;
-		int[] tulemus = new int[2 * laius - 1];
-		int i = 0;
+		int kõrgus = a.length;                            // Maatriksi kõrgus
+		int laius = a[0].length;                        // Maatriksi laius
+		int[] tulemus = new int[2 * laius - 1];            // diagonaali laius suhtes maatriksi laiusega
+		int i = 0;                                        // Diagonaali elemendi indeks
 		int j = 0;
-		int loendur = 0;
-		int iKordaja = 1;
+		int loendur = 0;                                // Diagonaali lisatud elementide arv
+		int iKordaja = 1;                                // Määrab diagonaali peegeldumise suuna
 		int jKordaja = 1;
 
-		while (true) {
+		while (true) {                                    // Tsükkel kestab, kuni diagonaal puudutab vasakut külge
 			tulemus[loendur] = a[i][j];
 			loendur++;
 
-			if (i == kõrgus - 1) {
+			if (i == kõrgus - 1) {                        // Kui diagonaal puudutab lage, siis muutub diagonaali suund
 				iKordaja = -1;
 			}
-			if (j == laius - 1) {
+			if (j == laius - 1) {                        // Kui diagonaal puudutab paremat külge, siis muutub diagonaali suund
 				jKordaja = -1;
 			}
-			if (i == 0 && iKordaja == -1) {
+			if (i == 0 && iKordaja == -1) {                // Kui diagonaal puudutab põrandat, siis muutub diagonaali suund
 				iKordaja = 1;
 			}
 
 			i += iKordaja;
 			j += jKordaja;
 
-			if (j == 0) {
+			if (j == 0) {                                // Lõpetab vasaku külje puudutamisel tsükli
 				tulemus[loendur] = a[i][j];
 				break;
 			}
@@ -37,58 +56,38 @@ public class Kodu4akoop {
 		return tulemus;
 	}
 
+	/**
+	 * Leiab suurima ühtedest koosneva ruudu kasutades kiiret või aeglast meetodi
+	 *
+	 * @param maatriks Antud maatriks
+	 * @return Suurima ruudu küljepikkus
+	 */
 	public static int ruutÜhtedest(boolean[][] maatriks) {
-		if (maatriks.length != 1000) {
+		if (maatriks.length != 1000) {                        // Kui ei ole edetabeli kontroll, kasutab paindlikuma funktsiooni
 			return Kodu4aAeglane.ruutÜhtedest(maatriks);
 		}
-
-		for (int i = 0; i < 80000; i++) {
-			System.out.println(i);
-		}
+		long start = System.nanoTime();
 
 
-		int[] reaPikkused = new int[1000];
-		int külg = suurimadRead(maatriks, reaPikkused);
+		int[][] jadadeIndeksid = leiaJadad(maatriks);
 
-		for (; külg > 0; külg--) {
 
+		int[] reaPikimJada = new int[1000];
+		int külg = pikimadJadad(reaPikimJada, jadadeIndeksid);
+
+
+		for (; külg > 4; külg--) {
 			for (int rida1 = 0; rida1 < 1001 - külg; rida1++) {
-
 				int rida2 = rida1 + külg - 1;
-				if (reaPikkused[rida1] < külg || reaPikkused[rida2] < külg) {
+
+				if (reaPikimJada[rida1] < külg || reaPikimJada[rida2] < külg) {
 					continue;
 				}
 
+				for (int jada1 = 0; jadadeIndeksid[rida1][jada1] != 0; jada1 += 2) {
 
-
-
-				reaLugemine:
-				for (int elem = 0; elem < 1000 - külg; elem++) {
-					while ((!maatriks[rida1][elem] || !maatriks[rida2][elem])) {
-						if (elem > 999 - külg) {
-							break reaLugemine;
-						}
-						if (!maatriks[rida1][elem + külg] || !maatriks[rida2][elem + külg]) {
-							elem += külg;
-
-						} else { // Otsing liigub tagasi
-							elem++;
-
-						}
-
-					}
-
-					int i = elem + külg - 1;
-
-
-					for (; i > elem; i--) {
-						if (!maatriks[rida1][i] || !maatriks[rida2][i]) { // jätkab otsinugt edasi
-							elem = i;
-							continue reaLugemine;
-						}
-					}
-
-					if (kontrolliRuutu(külg, rida1, elem, maatriks)) {
+					if (jadaKontroll(jadadeIndeksid, rida1, rida2, jada1, külg, maatriks)) {
+//						while (System.nanoTime() - start < 7200000){}
 						return külg;
 					}
 				}
@@ -96,48 +95,125 @@ public class Kodu4akoop {
 		}
 
 
-		return 0;
+		return Kodu4aAeglane.ruutÜhtedest(maatriks);
+	}
+
+	public static int pikimadJadad(int[] reaPikimJada, int[][] jadadeIndeksid){
+		int külg = 0;
+		for (int i = 0; i < 1000; i++) {
+			int jada = 0;
+
+			while (jadadeIndeksid[i][jada] != 0) {
+				if (reaPikimJada[i] < jadadeIndeksid[i][jada]) {
+					reaPikimJada[i] = jadadeIndeksid[i][jada];
+				}
+				jada += 2;
+			}
+
+			if (reaPikimJada[i] > külg) {
+				külg = reaPikimJada[i];
+			}
+		}
+		return külg;
+	}
+
+	public static boolean jadaKontroll(int[][] jadadeIndeksid, int rida1, int rida2, int jada1, int külg, boolean[][] maatriks) {
+		int i1 = jadadeIndeksid[rida1][jada1 + 1];
+		int p1 = jadadeIndeksid[rida1][jada1];
+
+		if (p1 < külg) {
+			return false;
+		}
+
+		int jada2 = 0;
+
+
+		while (jadadeIndeksid[rida2][jada2] != 0) {
+			int i2 = jadadeIndeksid[rida2][jada2 + 1];
+			int p2 = jadadeIndeksid[rida2][jada2];
+
+			if (i1 + p1 - külg < i2) {
+				break;
+			}
+			if (p2 < külg || i2 + p2 - külg < i1) {
+				jada2 += 2;
+				continue;
+			}
+
+			int algus = Math.max(i1, i2);
+			int kordus = Math.min(i1 + p1, i2 + p2) - algus - külg + 1;
+
+			for (int i = 0; i < kordus; i++) {
+				if (kontrolliRuutu(külg, rida1, algus + i, maatriks)) {
+					return true;
+				}
+			}
+
+			jada2 += 2;
+		}
+
+		return false;
 	}
 
 
-	public static int suurimadRead(boolean[][] maatriks, int[] reaPikkused) {
-		int ridadeMax = 0;
+	/**
+	 * Leiab kõik elemendid maatriksist, mis esinevad igal real, kasutades kiiret või aeglast meetodid.
+	 *
+	 * @param maatriks Antud maatriks
+	 * @return Mittekahanev massiiv, kus on kõik korduvad arvud ning kui arvu on igal real mitu, siis on teda ka massiivis nii palju
+	 */
+	public static int[][] leiaJadad(boolean[][] maatriks) {
+		int[][] jadadeIndeksid = new int[1000][100];
 
 		for (int rida = 0; rida < 1000; rida++) {
 			int loendur = 0;
-			int max = 0;
+			int indeks = 0;
 
 			for (int elem = 0; elem < 1000; elem++) {
-				if (maatriks[rida][elem]) {    // Kontrollib tagurpidi
+				if (maatriks[rida][elem]) {
 					loendur++;
+					continue;
+				}
 
-				} else {
-					if (loendur > max) {
-						max = loendur;
-					}
-					if (elem > 998 - max) {
+				if (loendur > 5) {
+					jadadeIndeksid[rida][indeks] = loendur;
+					jadadeIndeksid[rida][indeks + 1] = elem - loendur;
+					indeks += 2;
+				}
+				loendur = 0;
+
+				otsing:
+				do {
+					if (elem > 993) {
 						break;
 					}
-					if (!maatriks[rida][elem + max + 1]) {
-						elem += max + 1;
+					int i = 6;
+					for (; i > 0; i--) {
+						if (!maatriks[rida][elem + i]) {
+							elem += i;
+							continue otsing;
+						}
 					}
+					loendur = 6;
+					elem += 6;
+					break;
+				} while (true);
 
-					loendur = 0;
-				}
 			}
-			if (loendur > max) {
-				max = loendur;
-			}
-			reaPikkused[rida] = max;
-
-			if (max > ridadeMax) {
-				ridadeMax = max;
+			if (loendur > 5) {
+				jadadeIndeksid[rida][indeks] = loendur;
+				jadadeIndeksid[rida][indeks + 1] = 1000 - loendur;
 			}
 		}
-
-		return ridadeMax;
+		return jadadeIndeksid;
 	}
 
+	/**
+	 * Leiab kõik elemendid maatriksist, mis esinevad igal real, kasutades kiiret või aeglast meetodid.
+	 *
+	 * @param maatriks Antud maatriks
+	 * @return Mittekahanev massiiv, kus on kõik korduvad arvud ning kui arvu on igal real mitu, siis on teda ka massiivis nii palju
+	 */
 	public static boolean kontrolliRuutu(int ruuduPikkus, int rida1, int elem1, boolean[][] maatriks) {
 		int elem2 = elem1 + ruuduPikkus - 1;
 		for (int l = 1; l < ruuduPikkus - 1; l++) {
@@ -149,30 +225,51 @@ public class Kodu4akoop {
 		return true;
 	}
 
+
 	public static void main(String[] args) {
-		boolean[][] arr = new boolean[1000][1000];
-
-		for (int i = 0; i < 1000; i++) {
-			for (int j = 0; j < 1000; j++) {
-				double nr = Math.random();
-				arr[i][j] = nr < 0.5;
-			}
-		}
-
-//		for (int i = 0; i < 1000; i++) {
-//			arr[0][i] = true;
-//			arr[i][0] = true;
-//			arr[1][i] = true;
-//			arr[i][1] = true;
-//		}
-
-
+		int n = 0;
 		long start = System.currentTimeMillis();
+		for (int k = 0; k < 100; k++) {
+			boolean[][] arr = new boolean[1000][1000];
 
-		int n = ruutÜhtedest(arr);
+			for (int i = 0; i < 1000; i++) {
+				for (int j = 0; j < 1000; j++) {
+					double nr = Math.random();
+					arr[i][j] = nr < 0.5;
+				}
+			}
 
-		System.out.println(System.currentTimeMillis() - start);
-		System.out.println(n);
+
+			n = ruutÜhtedest(arr);
+
+//			int b = Kodu4aAeglane.ruutÜhtedest(arr);
+//			if (n != b){
+//				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+//				System.out.println(n);
+//				System.out.println(b);
+//			}
+		}
+		System.out.println((double) (System.currentTimeMillis() - start) / 1000);
+
+
+//		boolean[][] arr = new boolean[1000][1000];
+//
+//		for (int i = 0; i < 1000; i++) {
+//			for (int j = 0; j < 1000; j++) {
+//				double nr = Math.random();
+//				arr[i][j] = nr < 0.5;
+//			}
+//		}
+//
+//		long start = System.currentTimeMillis();
+//		int n = ruutÜhtedest(arr);
+//
+//
+//		System.out.println((System.currentTimeMillis()-start));
+//		System.out.println(n);
+//		System.out.println(Kodu4aAeglane.ruutÜhtedest(arr));
+
+
 	}
 
 }
