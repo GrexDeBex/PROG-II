@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodu 4a 7.8ms">
+    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodu 4a 3.99ms">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Kodu4a.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kodu4a.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Kodu4akoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kodu4akoop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Kodu4aAeglane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kodu4aAeglane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Kodu4akoop.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,14 +36,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "settings.editor.selected.configurable": "preferences.keymap"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\ramma\Documents\Java\PROG-II\src\Tehtud" />
@@ -166,7 +167,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678117674898</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Kodu 4a 3.99ms">
+      <created>1678308406011</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1678308406011</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -196,6 +204,7 @@
     <MESSAGE value="Kodu 4a 8.6ms" />
     <MESSAGE value="Kodu 4a 7.5ms" />
     <MESSAGE value="Kodu 4a 7.8ms" />
-    <option name="LAST_COMMIT_MESSAGE" value="Kodu 4a 7.8ms" />
+    <MESSAGE value="Kodu 4a 3.99ms" />
+    <option name="LAST_COMMIT_MESSAGE" value="Kodu 4a 3.99ms" />
   </component>
 </project>

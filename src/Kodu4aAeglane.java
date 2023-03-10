@@ -1,64 +1,44 @@
+
+/*
+ * Klass on aeglane versioon suurima ühtedest moodustatud ruudu leidmiseks.
+ *
+ * Algselt leitakse maatriksist suurim võimalik ruut, mis võiks eksisteerida, ning võetakse tema väikseim külg parameetriks,
+ * kust alates hakatakse ruute otsima. Kui maatriksi element on ruudu vasak ülemine nurk ning otsitaks hektel n küljepikkusega
+ * ruutu, siis see koordinaat saab olla ainult ühe ruudu nurk. Käiakse läbi iga selline võimalik kordinaat ning vaadatakse
+ * kas seal on ruut või mitte.
+ * */
+
+
 public class Kodu4aAeglane {
 
-	public static int[] pikendatudDiagonaal(int[][] a) {
-		int kõrgus = a.length;
-		int laius = a[0].length;
-		int[] tulemus = new int[2 * laius - 1];
-		int i = 0;
-		int j = 0;
-		int loendur = 0;
-		int iKordaja = 1;
-		int jKordaja = 1;
-
-		while (true) {
-			tulemus[loendur] = a[i][j];
-			loendur++;
-
-			if (i == kõrgus - 1) {
-				iKordaja = -1;
-			}
-			if (j == laius - 1) {
-				jKordaja = -1;
-			}
-			if (i == 0 && iKordaja == -1) {
-				iKordaja = 1;
-			}
-
-			i += iKordaja;
-			j += jKordaja;
-
-			if (j == 0) {
-				tulemus[loendur] = a[i][j];
-				break;
-			}
-		}
-
-
-		return tulemus;
-	}
-
-	public static int ruutÜhtedest(boolean[][] maatriks){
+	/**
+	 * Leiab suurima ühtedest koosneva ruudu
+	 *
+	 * @param maatriks Antud maatriks
+	 * @return Suurima ruudu küljepikkus.
+	 */
+	public static int ruutÜhtedest(boolean[][] maatriks) {
 		int massiiviPikkus = maatriks.length;
 
-		if (massiiviPikkus == 1){
-			if (maatriks[0][0]){
+		if (massiiviPikkus == 1) {    // Erandi kontroll, kui maatriks on 1x1
+			if (maatriks[0][0]) {
 				return 1;
-			}else {
+			} else {
 				return 0;
 			}
 		}
 
 
-		int ruuduPikkus = suurimRuut(maatriks);
+		int ruuduPikkus = suurimRuut(maatriks);            // Leiab suurima võimaliku ruudu küljepikkuse
 
 
-		for (; ruuduPikkus > 0; ruuduPikkus--) {
-			int võimalusi = massiiviPikkus-ruuduPikkus+1;
+		for (; ruuduPikkus > 1; ruuduPikkus--) {                    // Käib läbi iga võimaliku küljepikkuse alates suurimast
+			int võimalusi = massiiviPikkus - ruuduPikkus + 1;        // Leiab, mitu erinevat kindla küljepikkusega ruutu mahub maatriksi
 
-			for (int iNurk = 0; iNurk < võimalusi; iNurk++) {
+			for (int iNurk = 0; iNurk < võimalusi; iNurk++) {        // Käib läbi iga võimaliku ruudu leides vasaku ülemise nurga koordinaadid
 				for (int jNurk = 0; jNurk < võimalusi; jNurk++) {
 
-					if (kontrolliRuutu(ruuduPikkus, iNurk, jNurk, maatriks)){
+					if (kontrolliRuutu(ruuduPikkus, iNurk, jNurk, maatriks)) {
 						return ruuduPikkus;
 					}
 				}
@@ -68,20 +48,25 @@ public class Kodu4aAeglane {
 		return 0;
 	}
 
-	public static int suurimRuut(boolean[][] maatriks){
+	/**
+	 * Leiab maatriksist suurima võimaliku küljepikkuse, mis võib ruudul olla
+	 *
+	 * @param maatriks Antud maatriks
+	 * @return Suurima võimaliku ruudu küljepikkus.
+	 */
+	public static int suurimRuut(boolean[][] maatriks) {
 		int pikkus = maatriks.length;
-		int max1 = 0;
-		int max2 = 0;
-		int max3 = 0;
-		int max4 = 0;
+		int max1 = 0;        // Pikima rea pikkus
+		int max2 = 0;        // Teise pikima rea pikkus
+		int max3 = 0;        // Pikima veeru pikkus
+		int max4 = 0;        // Teise pikima veeru pikkus
 
 
-
-		for (boolean[] rida : maatriks) {
+		for (boolean[] rida : maatriks) {        // Leiab kaks pikimat ühtede jada ridades
 			int loendur = 0;
 			int max = 0;
 
-			for (boolean elem : rida) {
+			for (boolean elem : rida) {            // Leiab rea pikima ühtede jada
 				if (elem) {
 					loendur++;
 
@@ -93,7 +78,7 @@ public class Kodu4aAeglane {
 				}
 			}
 
-			if (loendur > max) {
+			if (loendur > max) {                // Uuendakse vastavalt andmeid
 				max = loendur;
 			}
 
@@ -106,12 +91,13 @@ public class Kodu4aAeglane {
 			}
 		}
 
-		for (int i = 0; i < pikkus; i++) {
+
+		for (int i = 0; i < pikkus; i++) {            // Leiab kaks pikimat ühtede jada veerus
 			int loendur = 0;
 			int max = 0;
 
-			for (int j = 0; j < pikkus; j++) {
-				if (maatriks[j][i]) {
+			for (boolean[] rida : maatriks) {        // Leiab rea pikima ühtede jada
+				if (rida[i]) {
 					loendur++;
 
 				} else {
@@ -122,91 +108,55 @@ public class Kodu4aAeglane {
 				}
 			}
 
-			if (loendur > max) {
+			if (loendur > max) {                    // Uuendakse vastavalt andmeid
 				max = loendur;
 			}
 
 			if (max > max3) {
 				max4 = max3;
 				max3 = max;
-				if (max4 >= max2){
+				if (max4 >= max2) {
 					break;
 				}
 
 			} else if (max > max4) {
 				max4 = max;
-				if (max4 >= max2){
+				if (max4 >= max2) {
 					break;
 				}
 			}
 		}
-		return Math.min(max2, max4);
+		return Math.min(max2, max4);        // Tagastab kõige suurema ruudu kõige väiksema küljepikkuse
 	}
 
-	public static boolean kontrolliRuutu(int ruuduPikkus, int iNurk, int jNurk, boolean[][] maatriks){
-		for (int k = 0; k < 2; k++) {
-			for (int l = ruuduPikkus-1; l >= k; l--) {
-				switch (k) {
-					case 0:
-						if (!maatriks[iNurk+l][jNurk]){
-							return false;
-						}
-						break;
-					case 1:
-						if (!maatriks[iNurk][jNurk+l]){
-							return false;
-						}
-						break;
-				}
+
+	/**
+	 * Kontrollib, kas antud kohas asub ühtedest ruut
+	 *
+	 * @param ruuduPikkus Kontrollitav küljepikkus
+	 * @param iNurk       Ruudu vasaku ülemise nurga rida
+	 * @param jNurk       Ruudu vasaku ülemise nurga veerg
+	 * @param maatriks    Antud maatriks
+	 * @return True, kui selles kohas asus ruut.
+	 */
+	public static boolean kontrolliRuutu(int ruuduPikkus, int iNurk, int jNurk, boolean[][] maatriks) {
+
+		for (int l = ruuduPikkus - 1; l >= 0; l--) {        // Kontrollib kas read moodustavad ühtedest küljed
+			if (!maatriks[iNurk + l][jNurk] || !maatriks[iNurk][jNurk + l]) {
+				return false;
 			}
 		}
 
-		iNurk = iNurk + ruuduPikkus - 1;
+
+		iNurk = iNurk + ruuduPikkus - 1;        // Leiab parema alumise nurga koordinaadid
 		jNurk = jNurk + ruuduPikkus - 1;
-		for (int k = 0; k < 2; k++) {
-			for (int l = ruuduPikkus-2; l >= k; l--) {
-				switch (k) {
-					case 0:
-						if (!maatriks[iNurk-l][jNurk]){
-							return false;
-						}
-						break;
-					case 1:
-						if (!maatriks[iNurk][jNurk-l]){
-							return false;
-						}
-						break;
-				}
+		for (int l = ruuduPikkus - 2; l >= 0; l--) {            // Kontrollib, kas veerud moodustavad ühtedest küljed
+			if (!maatriks[iNurk - l][jNurk] || !maatriks[iNurk][jNurk - l]) {
+				return false;
 			}
 		}
 
 		return true;
-	}
-
-	public static void main(String[] args) {
-		boolean[][] arr = new boolean[1000][1000];
-
-		for (int i = 0; i < 1000; i++) {
-			for (int j = 0; j < 1000; j++) {
-				double nr = Math.random();
-				arr[i][j] = nr < 0.5;
-			}
-		}
-
-		for (int i = 0; i < 1000; i++) {
-			arr[0][i] = true;
-			arr[i][0] = true;
-			arr[1][i] = true;
-			arr[i][1] = true;
-		}
-
-
-		long start = System.currentTimeMillis();
-
-		int n = ruutÜhtedest(arr);
-
-		System.out.println(System.currentTimeMillis() - start);
-		System.out.println(n);
 	}
 
 }
