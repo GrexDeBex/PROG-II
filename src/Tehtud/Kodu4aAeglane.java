@@ -1,4 +1,4 @@
-
+package Tehtud;
 /*
  * Klass on aeglane versioon suurima ühtedest moodustatud ruudu leidmiseks.
  *
