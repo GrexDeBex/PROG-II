@@ -4,94 +4,65 @@ import java.util.Arrays;
 class Kodu5bKoopia {
 
 	static int[][] summad(int n){
-		ArrayList<ArrayList> T = new ArrayList<>();
-		S(n, T, new ArrayList());
+		ArrayList<int[]> T = new ArrayList<>();;
 
-		int[][] M = new int[T.size()][];
+		for (int i = 2; i < 7 && n>0; i+=2) {
+			if (n == i){
+				T.add(new int[]{i});
+				break;
+			}
 
-		for (int i = 0; i < T.size(); i++) {
-			ArrayList<Integer> t = T.get(i);
-			int[] m = new int[t.size()];
+			for (int[] l : summad(n-i)) {
+				if (l[0] != i){
+					int[] a = Arrays.copyOf(l, l.length+1);
+					System.arraycopy(l, 0, a, 1, l.length);
+					a[0] = i;
 
-			for (int j = 0; j < t.size(); j++)
-				m[j] = t.get(j);
+					T.add(a);
+				}
+			}
 
-			M[i] = m;
 		}
 
-		return M;
-
-	}
-
-	static void S(int n, ArrayList<ArrayList> T, ArrayList<Integer> v){
-
-		for (int i = 2; i < 7; i+=2) {
-			if (v.size() > 0)
-				if (v.get(v.size()-1) == i)
-					continue;
-
-			v.add(i);
-			if (n-i == 0)
-				T.add(new ArrayList(v));
-			if (n-i > 0)
-				S(n-i, T, v);
-
-			v.remove(v.size()-1);
-		}
-
-
+		return T.toArray(new int[0][]);
 	}
 
 	static String[] sonePoime(String[] a, String[] b){
-		ArrayList<ArrayList> T = new ArrayList<>();
+		String[] T = C(new String[0], a, b, 1);
 
-		P(a, b, 0, 0, T, new ArrayList());
-
-		String[] L = new String[T.size()];
-
-		for (int i = 0; i < T.size(); i++) {
-			String s = "";
-			s += T.get(i).get(0);
-
-			for (int j = 1; j < T.get(i).size(); j++) {
-
-				s += " " + T.get(i).get(j);
-			}
-			L[i] = s;
-		}
-
-		return L;
-
-	}
-
-	static void P(String[] a, String[] b, int i, int j, ArrayList<ArrayList> T, ArrayList v){
-		if (i < a.length){
-			v.add(a[i]);
-			if (i+1 == a.length && j == b.length)
-				T.add(new ArrayList<>(v));
-			else
-				P(a, b, i+1, j, T, v);
-
-			v.remove(v.size()-1);
-		}
-
-		if (j < b.length){
-			v.add(b[j]);
-
-			if (i == a.length && j+1 == b.length)
-				T.add(new ArrayList(v));
-			else
-				P(a, b, i, j+1, T, v);
-
-			v.remove(v.size()-1);
-		}
+		return C(T, b, a, 2);
 	}
 
 
+	static String[] C(String[] T, String[] n, String[] m, int i){
+		String[] N = new String[L(n)-1];
+		System.arraycopy(n, 1, N, 0, L(N));
+
+		if (L(N) == 0)
+			return c(T, m, n);
+
+		String[] P = (i == 1) ? sonePoime(N, m) : sonePoime(m, N);
+		for (String l : P)
+			T = c(T, l.split(" "), n);
+
+		return T;
+	}
+
+	static String[] c(String[] T, String[] r, String[] n){
+		String[] s = Arrays.copyOf(r, L(r)+1);
+		System.arraycopy(r, 0, s, 1, L(r));
+		s[0] = n[0];
+
+		T = Arrays.copyOf(T, L(T)+1);
+		T[L(T)-1] = String.join(" ", s);
+
+		return T;
+	}
 
 
-
-
+	static int L (Object[] a){
+		return a.length;
+	}
 
 
 
@@ -105,6 +76,8 @@ class Kodu5bKoopia {
 		String[] b = {"olen", "siin"};
 		System.out.println(Arrays.toString(sonePoime(a, b)));
 		System.out.println("[kas mina olen siin, kas olen mina siin, kas olen siin mina, olen kas mina siin, olen kas siin mina, olen siin kas mina]");
-    }
+
+		System.out.println(Arrays.deepToString(summad(8)));
+	}
 
 }

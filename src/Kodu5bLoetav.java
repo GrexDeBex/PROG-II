@@ -3,7 +3,7 @@ import java.util.Arrays;
 
 class Kodu5bLoetav {
 
-	static int[][] summad(int n){
+	int[][] summad(int n){
 		ArrayList<ArrayList<Integer>> tulemused = new ArrayList<>();
 		ArrayList<Integer> variant = new ArrayList<>();
 		summaRek(n, tulemused, variant);
@@ -24,12 +24,12 @@ class Kodu5bLoetav {
 
 	}
 
-	public static void summaRek(int n, ArrayList<ArrayList<Integer>> tulemused, ArrayList<Integer> variant){
+	void summaRek(int n, ArrayList<ArrayList<Integer>> tulemused, ArrayList<Integer> variant){
 		for (int i = 2; i < 7; i+=2) {
 			if (variant.size() > 0)
-				if (variant.get(variant.size()-1) == i){
+				if (variant.get(variant.size()-1) == i)
 					continue;
-				}
+
 
 			if (n-i == 0){
 				variant.add(i);
@@ -93,7 +93,7 @@ class Kodu5bLoetav {
 		}
 	}
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 		String[] a = {"kas", "mina"};
 		String[] b = {"olen", "siin"};
 		System.out.println(Arrays.toString(sonePoime(a, b)));
