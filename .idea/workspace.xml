@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodutöö 5 562">
-      <change afterPath="$PROJECT_DIR$/src/Kodu6b.java" afterDir="false" />
+    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodutöö 6 18">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Kodu6b.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kodu6b.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -215,7 +215,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680288447713</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Kodutöö 6 18">
+      <created>1680555958015</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1680555958015</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -250,6 +257,7 @@
     <MESSAGE value="KT" />
     <MESSAGE value="Kodutöö 5 995" />
     <MESSAGE value="Kodutöö 5 562" />
-    <option name="LAST_COMMIT_MESSAGE" value="Kodutöö 5 562" />
+    <MESSAGE value="Kodutöö 6 18" />
+    <option name="LAST_COMMIT_MESSAGE" value="Kodutöö 6 18" />
   </component>
 </project>
