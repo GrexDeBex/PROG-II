@@ -1,103 +1,180 @@
 import java.util.Arrays;
 
 class Kodu6b {
-	public static int loendur;
+//	public static long loendur;
 
 	public static int[][] jaotusRühmadeks(int[] sisend) {
-		int[][] parim_tulemus = new int[1][1];
-		parim_tulemus[0][0] = Integer.MAX_VALUE;
+		int[][] parim_tulemus = new int[1][];
+		parim_tulemus[0] = new int[]{2_000_000_000, 1_000_000_000, -1_000_000_000};
+
+		int sum = 0;
+		for (int elem : sisend) {
+			sum += elem;
+		}
+
+
+
+
+
+
+//		int x = 0;									// AEGLASEKS TEGEMINE!!!!!!!!!!!!!
+//		for (int j = 0; j < 150_000; j++) {
+//			for (int k = 0; k < 100; k++) {
+//				x+= k;
+//			}
+//		}
+//		System.out.println(x);
+
+
+
+
+
 
 		for (int i = 2; i < sisend.length; i++) {
-			int[][] tulemus = new int[i + 1][1];
+//			System.out.println(loendur);
+//			loendur = 0;
+			int[][] tulemus = new int[i + 1][3];
+
+			tulemus[0] = new int[]{0, -1_000_000_000, 1_000_000_000};
 			tulemus[1] = new int[]{sisend[0]};
 
-			tulemus = leiaParimJaotus(sisend, tulemus, i, 1, 1, 1, parim_tulemus[0][0]);
+			tulemus = leiaParimJaotus(sisend, tulemus, 1, 1, 1, parim_tulemus[0][0], sum-sisend[0]);
 
-			if (tulemus[0][0] < parim_tulemus[0][0]) parim_tulemus = tulemus;
+			if (tulemus[0][0] < parim_tulemus[0][0])
+				parim_tulemus = tulemus;
+
+
+
+
 		}
 
 
 		return Arrays.copyOfRange(parim_tulemus, 1, parim_tulemus.length);
 	}
 
-	public static int[][] leiaParimJaotus(int[] sisend, int[][] hetkeJaotus, int ruhmadeArv, int ruhm, int jarg, int sisendiJarg, int parim_vahe) {
+	public static int[][] leiaParimJaotus(int[] sisend, int[][] jaotus, int i, int j, int k, int parimVahe, int jaak) {
+//		loendur++;
+		int ruhmiJaanud = jaotus.length - i;
 
-		if (ruhmadeArv == 1) {
-			int[] hetkeRuhm = Arrays.copyOf(hetkeJaotus[ruhm], jarg + sisend.length - sisendiJarg);
-			System.arraycopy(sisend, sisendiJarg, hetkeRuhm, jarg, sisend.length - sisendiJarg);
+		if (ruhmiJaanud == 1) {
+			jaotus[i] = viimaneRuhmKoopia(sisend, k, jaotus[i][0]);
+			tulemus(jaotus, i);
 
-			hetkeJaotus[ruhm] = hetkeRuhm;
-			hetkeJaotus[0][0] = tulemus(hetkeJaotus, hetkeJaotus.length);
-
-
-			return hetkeJaotus;
-		}
-
-
-		if (sisendiJarg == sisend.length || tulemus(hetkeJaotus, ruhm) >= parim_vahe || sisend.length - sisendiJarg < ruhmadeArv-1) {
-			hetkeJaotus[0][0] = Integer.MAX_VALUE;
-			return hetkeJaotus;
+			return jaotus;
 		}
 
 
 
-		int[][] jargmineRuhm = new int[hetkeJaotus.length][];
-		int[][] samaRuhm = new int[hetkeJaotus.length][];
 
-		long s = System.currentTimeMillis();
-
-		for (int i = 0; i < hetkeJaotus.length; i++) {
-			jargmineRuhm[i] = Arrays.copyOf(hetkeJaotus[i], hetkeJaotus[i].length);
-			samaRuhm[i] = Arrays.copyOf(hetkeJaotus[i], hetkeJaotus[i].length);
+		if (k == sisend.length || sisend.length - k < ruhmiJaanud-1 ||
+				jaagiKontroll(jaotus, i, jaak, ruhmiJaanud, parimVahe)) {
+			jaotus[0][0] = 2_000_000_000;
+			return jaotus;
 		}
 
-		loendur += System.currentTimeMillis()-s;
-
-		jargmineRuhm[ruhm + 1] = new int[]{sisend[sisendiJarg]};
-		jargmineRuhm = leiaParimJaotus(sisend, jargmineRuhm, ruhmadeArv - 1, ruhm + 1, 1, sisendiJarg + 1, parim_vahe);
 
 
-		samaRuhm[ruhm] = Arrays.copyOf(samaRuhm[ruhm], jarg + 1);
-		samaRuhm[ruhm][jarg] = sisend[sisendiJarg];
-		samaRuhm = leiaParimJaotus(sisend, samaRuhm, ruhmadeArv, ruhm, jarg + 1, sisendiJarg + 1, parim_vahe);
+		int[][] koopia = koopia(jaotus);
 
 
-		if (jargmineRuhm[0][0] < samaRuhm[0][0])
-			return jargmineRuhm;
+		int[] rida = new int[jaotus[i].length+1];
+		System.arraycopy(jaotus[i], 0, rida, 0, jaotus[i].length);
+		rida[rida.length-1] = sisend[k];
+		jaotus[i] = rida;
+
+		koopia[i + 1] = new int[]{sisend[k]};
+		tulemus(koopia, i);
+
+
+		jaotus = leiaParimJaotus(sisend, jaotus, i, j + 1, k + 1, parimVahe, jaak - sisend[k]);
+		koopia = leiaParimJaotus(sisend, koopia, i + 1, 1, k + 1, parimVahe, jaak - sisend[k]);
+
+
+
+		if (koopia[0][0]  < jaotus[0][0])
+			return koopia;
 		else
-			return samaRuhm;
+			return jaotus;
 	}
 
-	public static int tulemus(int[][] jaotus, int kaugus) {
-		int min = Integer.MAX_VALUE;
-		int max = Integer.MIN_VALUE;
-
-		for (int i = 1; i < kaugus; i++) {
-			int sum = 0;
-			for (int elem : jaotus[i])
-				sum += elem;
-
-			if (min > sum) min = sum;
-
-			if (max < sum) max = sum;
-
+	public static boolean jaagiKontroll(int[][] jaotus, int ruhm, int jaak, int ruhmiJaanud, int parimVahe){
+		if (jaotus[0][0] >= parimVahe){
+			return true;
 		}
 
+		for (int elem : jaotus[ruhm]) {
+			jaak += elem;
+		}
 
-		return max - min;
+		int min = jaak / ruhmiJaanud;
+		int max = (min == (jaak-1) / (ruhmiJaanud)) ? min+1 : min;
+		min = Math.min(jaotus[0][2], min);
+		max = Math.max(jaotus[0][1], max);
+
+		return parimVahe <= max - min;
+	}
+
+	public static void tulemus(int[][] jaotus, int ruhm) {
+		int sum = 0;
+
+		for (int elem : jaotus[ruhm]) {
+			sum += elem;
+		}
+		if (sum > jaotus[0][1])
+			jaotus[0][1] = sum;
+
+		if (sum < jaotus[0][2])
+			jaotus[0][2] = sum;
+
+		jaotus[0][0] = jaotus[0][1] - jaotus[0][2];
 	}
 
 
-	public static void main(String[] args) {
+	public static int[][] koopia(int[][] originaal){
+		int[][] koopia = new int[originaal.length][];
+
+		for (int i = 0; i < originaal.length; i++) {
+			int[] rida = new int[originaal[i].length];
+
+			for (int j = 0; j < rida.length; j++)
+				rida[j] = originaal[i][j];
+
+
+
+			koopia[i] = rida;
+		}
+
+		return koopia;
+	}
+
+
+	public static int[] viimaneRuhmKoopia(int[] sisend, int sisendiJarg, int esimeneLiige){
+		int[] koopia = new int[sisend.length - sisendiJarg + 1];
+
+		koopia[0] = esimeneLiige;
+
+		for (int i = 1; i < koopia.length; i++, sisendiJarg++)
+			koopia[i] = sisend[sisendiJarg];
+
+		return koopia;
+	}
+
+	public static void main(String[] args){
 		int[] a = {1, 2, 3, 4, 5};
-		int[] b = {1, 2, 3, 4, 5, 1, 2, 6, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 67, 4, 5, 1, 2};
+		int[] b = {1, 2, 3, 4, 5, 1, 2, 6, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 11117, 4, 5, 1, 2,
+				1, 2, 3, 4, 5, 1, 2, 6, 4, 5, 1, 5, 1, 2, 3, 3, 5, 2, 4, 5, 1, 2, 2, 0 , 1, 1};
+		int[] c = {59594, 63030, 5190, 14138, 24643, 53044};
+		int[] d = {1, 2, 3, 4, 5, 1, 2, 6, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 67, 4, 5, 1, 2};
 
+		long s = System.nanoTime();
 
-		int[][] tulemus = jaotusRühmadeks(b);
+		int[][] tulemus = jaotusRühmadeks(d);
 		for (int[] elem : tulemus) {
 			System.out.println(Arrays.toString(elem));
 		}
-		System.out.println(loendur);
+//		System.out.println(loendur);
+
+		System.out.println(System.nanoTime() - s);
 
 	}//peameetod
 
