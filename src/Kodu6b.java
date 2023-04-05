@@ -14,9 +14,6 @@ class Kodu6b {
 
 
 
-
-
-
 //		int x = 0;									// AEGLASEKS TEGEMINE!!!!!!!!!!!!!
 //		for (int j = 0; j < 150_000; j++) {
 //			for (int k = 0; k < 100; k++) {
@@ -24,9 +21,6 @@ class Kodu6b {
 //			}
 //		}
 //		System.out.println(x);
-
-
-
 
 
 
