@@ -3,32 +3,24 @@ import java.util.Arrays;
 class Kodu6b {
 
 	public static int[][] jaotusRühmadeks(int[] sisend) {
-		int[][] tulemus = new int[1][1];                                        // Salvestab parima tulemuse
-		tulemus[0][0] = 2_000_000_000;                                            // Lisab kõige halvema võimaliku tulemuse võrdluseks
+		int[][] tulemus = new int[1][];                                            // Salvestab parima tulemuse
+		tulemus[0] = new int[]{2_000_000_000, 1_000_000_000, -1_000_000_000};    // Lisab kõige halvema võimaliku tulemuse võrdluseks
 
-		int[][] ajalugu1 = new int[sisend.length - 2][2];                        // Salvestab eelmiste jaotuste tulemusi
+		int jaak = summa(sisend) - sisend[0];                                    // Kui palju sisendi summast on veel järel
 
 		for (int i = 2; i < sisend.length; i++) {                                // Katsetab erinevate rühmade arvuga jaotusi
 			long time = System.currentTimeMillis();
-			int[][] jaotus = new int[i + 1][1];                                    // Uus jaotus
-			jaotus[0][0] = 0;                                                    // Baas väärtused võrdlemiseks
+
+			int[][] jaotus = new int[i + 1][3];                                    // Uus jaotus
+			jaotus[0] = new int[]{0, -1_000_000_000, 1_000_000_000};            // Baas väärtused võrdlemiseks
 			jaotus[1] = new int[]{sisend[0]};                                    // Lisab esimese sisendi elemendi esimesse rühma
 
-
-			int[][] ajalugu2 = new int[sisend.length - i][2];
-			for (int[] rida : ajalugu2) {
-				rida[0] = 1_000_000_000;
-				rida[1] = -1_000_000_000;
-			}
-
-			jaotus = leiaParimJaotus(sisend, jaotus, 1, 1, 1, ajalugu1, ajalugu2, tulemus[0][0], -1);    // Leiab parima tulemuse selle rühmade arvuga
-
-			ajalugu1 = ajalugu2;
+			jaotus = leiaParimJaotus(sisend, jaotus, 1, 1, 1, jaak, tulemus[0][0]);    // Leiab parima tulemuse selle rühmade arvuga
 
 			tulemus = (jaotus[0][0] < tulemus[0][0]) ? jaotus : tulemus;    // Vaatab, kas tulemus on parim
 
-			if (System.currentTimeMillis() - time > 80) {
-				return Kodu6bJaak.jaotusRühmadeks(sisend);
+			if (System.currentTimeMillis() - time > 30) {
+				return Kodu6bTeine.jaotusRühmadeks(sisend);
 			}
 		}
 
@@ -36,44 +28,24 @@ class Kodu6b {
 		return Arrays.copyOfRange(tulemus, 1, tulemus.length);            // Tagastab tulemuse
 	}
 
-
-	public static int[][] leiaParimJaotus(int[] sisend, int[][] jaotus, int rida, int elem, int jarg, int[][] ajalugu1, int[][] ajalugu2, int parimVahe, int l) {
-//		loendur++;
-
-		if (rida == 2 && elem == 1 && jarg > 2) {
-			l = jarg - 3;
-		}
-
+	public static int[][] leiaParimJaotus(int[] sisend, int[][] jaotus, int rida, int elem, int jarg, int jaak, int parimVahe) {
 
 		if (jaotus.length - rida == 1) {
-			jaotus[rida] = Kodu6bJaak.viimaneRuhmKoopia(sisend, jarg, jaotus[rida][0]);
-			tulemus(jaotus, ajalugu2, l);
+			jaotus[rida] = viimaneRuhmKoopia(sisend, jarg, jaotus[rida][0]);
+			tulemus(jaotus, rida);
+
 			return jaotus;
 		}
 
-		if (jarg == sisend.length || sisend.length - jarg < jaotus.length - rida - 1) {
-			jaotus[0][0] = Integer.MAX_VALUE;
+		boolean sisenditeHulk = jarg == sisend.length || sisend.length - jarg < jaotus.length - rida - 1;
+		boolean jaagiSobilikus = jaagiKontroll(jaotus, rida, jaak, jaotus.length - rida, parimVahe);
+
+		if (sisenditeHulk || jaagiSobilikus) {
+			jaotus[0][0] = 2_000_000_000;
 			return jaotus;
 		}
 
-		if (rida == 3 && elem == 1) {
-			int sum1 = Kodu6bJaak.summa(jaotus[1]);
-			int sum2 = Kodu6bJaak.summa(jaotus[2]);
-
-			int max = Math.max(sum1, sum2);
-			int min = Math.min(sum1, sum2);
-
-			max = Math.max(ajalugu1[jarg - 3][0], max);
-			min = Math.min(ajalugu1[jarg - 3][1], min);
-
-			if (parimVahe <= max - min) {
-				tulemus2(jaotus, ajalugu1, ajalugu2, jarg, sum2, l);
-				return jaotus;
-			}
-		}
-
-
-		int[][] koopia = Kodu6bJaak.koopia(jaotus);
+		int[][] koopia = koopia(jaotus);
 
 		int[] ruhm = new int[jaotus[rida].length + 1];
 		System.arraycopy(jaotus[rida], 0, ruhm, 0, jaotus[rida].length);
@@ -81,76 +53,93 @@ class Kodu6b {
 		jaotus[rida] = ruhm;
 
 		koopia[rida + 1] = new int[]{sisend[jarg]};
+		tulemus(koopia, rida);
 
-		jaotus = leiaParimJaotus(sisend, jaotus, rida, elem + 1, jarg + 1, ajalugu1, ajalugu2, parimVahe, l);
-		koopia = leiaParimJaotus(sisend, koopia, rida + 1, 1, jarg + 1, ajalugu1, ajalugu2, parimVahe, l);
+
+		jaotus = leiaParimJaotus(sisend, jaotus, rida, elem + 1, jarg + 1, jaak - sisend[jarg], parimVahe);
+		koopia = leiaParimJaotus(sisend, koopia, rida + 1, 1, jarg + 1, jaak - sisend[jarg], parimVahe);
 
 		return (koopia[0][0] < jaotus[0][0]) ? koopia : jaotus;
 	}
 
 
-	public static void tulemus2(int[][] jaotus, int[][] ajalugu1, int[][] ajalugu2, int jarg, int sum2, int l) {
-		int max = Math.max(sum2, ajalugu1[jarg - 3][0]);
-		int min = Math.min(sum2, ajalugu1[jarg - 3][1]);
+	public static boolean jaagiKontroll(int[][] jaotus, int ruhm, int jaak, int ruhmiJaanud, int parimVahe) {
+		for (int elem : jaotus[ruhm])
+			jaak += elem;
 
-		if (l != -1 && ajalugu2[l][0] - ajalugu2[l][1] > max - min) {
-			ajalugu2[l][0] = max;
-			ajalugu2[l][1] = min;
-		}
+		int min = jaak / ruhmiJaanud;
+		int max = (min == (jaak - 1) / (ruhmiJaanud)) ? min + 1 : min;
+		min = Math.min(jaotus[0][2], min);
+		max = Math.max(jaotus[0][1], max);
 
-		jaotus[0][0] = Integer.MAX_VALUE;
+		return parimVahe <= max - min;
+	}
+
+	public static void tulemus(int[][] jaotus, int ruhm) {
+		int sum = summa(jaotus[ruhm]);
+
+		jaotus[0][1] = Math.max(sum, jaotus[0][1]);
+		jaotus[0][2] = Math.min(sum, jaotus[0][2]);
+
+		jaotus[0][0] = jaotus[0][1] - jaotus[0][2];
 	}
 
 
-	public static void tulemus(int[][] jaotus, int[][] ajalugu2, int l) {
-		int max = -1_000_000_000;
-		int min = 1_000_000_000;
+	public static int[][] koopia(int[][] originaal) {
+		int[][] koopia = new int[originaal.length][];
 
-		for (int i = 2; i < jaotus.length; i++) {
-			int sum = Kodu6bJaak.summa(jaotus[i]);
-			max = Math.max(sum, max);
-			min = Math.min(sum, min);
+		for (int i = 0; i < originaal.length; i++) {
+			int[] rida = new int[originaal[i].length];
+			System.arraycopy(originaal[i], 0, rida, 0, rida.length);
+			koopia[i] = rida;
 		}
 
+		return koopia;
+	}
 
-		if (l != -1 && ajalugu2[l][0] - ajalugu2[l][1] > max - min) {
-			ajalugu2[l][0] = max;
-			ajalugu2[l][1] = min;
-		}
+	public static int summa(int[] massiiv) {
+		int sum = 0;
+		for (int elem : massiiv)
+			sum += elem;
 
-		int sum = Kodu6bJaak.summa(jaotus[1]);
-
-		max = Math.max(sum, max);
-		min = Math.min(sum, min);
+		return sum;
+	}
 
 
-		jaotus[0][0] = max - min;
+	public static int[] viimaneRuhmKoopia(int[] sisend, int sisendiJarg, int esimeneLiige) {
+		int[] koopia = new int[sisend.length - sisendiJarg + 1];
+
+		koopia[0] = esimeneLiige;
+
+		for (int i = 1; i < koopia.length; i++, sisendiJarg++)
+			koopia[i] = sisend[sisendiJarg];
+
+		return koopia;
 	}
 
 
 	public static void main(String[] args) {
-		int[] a = {1, 2, 3, 4, 5, 6, 7};
-		int[] b = {1, 2, 3, 4, 5, 1, 2, 6, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 11117, 4, 5, 1, 2,
-				1, 2, 3, 4, 5, 1, 2, 6, 4, 5, 1, 5, 1, 2, 3, 3, 5, 2, 4, 5, 1, 2, 2, 0, 1, 1};
+		int[] a = {1, 2, 3, 4, 5};
+		int[] b = {1, 2, 3, 4, 5, 1, 2, 6, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 11117, 4, 5, 1, 2, 1, 2, 3, 4, 5, 1, 2, 6, 4, 5, 1, 5, 1, 2, 3, 3, 5, 2, 4, 5, 1, 2, 2, 0, 1, 1};
 		int[] c = {59594, 63030, 5190, 14138, 24643, 53044};
 		int[] d = {1, 2, 3, 4, 5, 1, 2, 6, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 67, 4, 5, 1, 2};
-		int[] f = {4, 2, -3, 8, -3, 2, -8, -1, -4, -2, -5, 9, -7, 2, -1};
-		int[] g = {34629, 111600, 94026, 112119, 60632, 42020, 47532, 25681, 39103, 20688};
 
 		int[] e = new int[250];
+
 		for (int i = 0; i < e.length; i++) {
 			int j = (Math.random() < 0.5) ? 1 : -1;
 			e[i] = (int) (Math.random() * 100_000 * j);
 		}
 
-
 		long s = System.nanoTime();
-		int[][] tulemus = jaotusRühmadeks(d);
+
+		int[][] tulemus = jaotusRühmadeks(e);
 		for (int[] elem : tulemus) {
 			System.out.println(Arrays.toString(elem));
 		}
+
 		System.out.println(System.nanoTime() - s);
 
+	}//peameetod
 
-	}
-}
+}//Kodu6b
