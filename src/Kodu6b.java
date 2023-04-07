@@ -19,7 +19,7 @@ class Kodu6b {
 
 			tulemus = (jaotus[0][0] < tulemus[0][0]) ? jaotus : tulemus;    // Vaatab, kas tulemus on parim
 
-			if (System.currentTimeMillis() - time > 30) {
+			if (System.currentTimeMillis() - time > 75) {
 				return Kodu6bTeine.jaotusRühmadeks(sisend);
 			}
 		}
