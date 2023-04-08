@@ -21,28 +21,28 @@ class Kodu5b {
 	 * 2, 4 ja 6.
 	 *
 	 * @param n Arv, mida joatatakse liidetavateks
-	 * @return	Massiiv, kus on järjestaud kasvavas järjestuses liidetavate massiivid
+	 * @return Massiiv, kus on järjestaud kasvavas järjestuses liidetavate massiivid
 	 */
 	static int[][] summad(int n) {
-		List<int[]> T = new ArrayList();						// Sobivate tulemuste massiiv
+		List<int[]> T = new ArrayList();                        // Sobivate tulemuste massiiv
 
-		for (int i = 2; i < 7 && n > 0; i += 2) {				// Proovitakse 2, 4 ja 6 liidetavaid
-			if (n == i) {										// Kui i on viimane liidetav hakkab funktsioon tagasi liikuma
+		for (int i = 2; i < 7 && n > 0; i += 2) {                // Proovitakse 2, 4 ja 6 liidetavaid
+			if (n == i) {                                        // Kui i on viimane liidetav hakkab funktsioon tagasi liikuma
 				T.add(new int[]{i});
 				break;
 			}
 
-			for (int[] l : summad(n - i))					// Võetakse iga tulemus ja lisatakse algusesse i
-				if (l[0] != i) {								// Kontrollib, et kaks sama numbrit ei oleks järjest
+			for (int[] l : summad(n - i))                    // Võetakse iga tulemus ja lisatakse algusesse i
+				if (l[0] != i) {                                // Kontrollib, et kaks sama numbrit ei oleks järjest
 					int[] a = new int[l.length + 1];
 					System.arraycopy(l, 0, a, 1, l.length);
-					a[0] = i;									// Liidetavate massiiv, kuhu on hetke liidetav ette pandud
-					T.add(a);									// Salvetab tulemuse
+					a[0] = i;                                    // Liidetavate massiiv, kuhu on hetke liidetav ette pandud
+					T.add(a);                                    // Salvetab tulemuse
 				}
 
 		}
 
-		return T.toArray(new int[0][]);							// Teisendab massiiviks
+		return T.toArray(new int[0][]);                            // Teisendab massiiviks
 	}
 
 	/**
@@ -51,15 +51,15 @@ class Kodu5b {
 	 *
 	 * @param a Sõnade massiiv.
 	 * @param b Sõnade massiiv
-	 * @return	Lausete massiiv
+	 * @return Lausete massiiv
 	 */
 	static String[] sonePoime(String[] a, String[] b) {
-		List<String> t = new ArrayList();		// Listi salvestatakse sobivad laused
+		List<String> t = new ArrayList();        // Listi salvestatakse sobivad laused
 
-		O(a,b,t);				// Situatsioon, kus järgmine sõna tuleb a massiivist
-		O(b,a,t);				// Situatsioon, kus järgmine sõna tuleb b massiivist
+		O(a, b, t);                // Situatsioon, kus järgmine sõna tuleb a massiivist
+		O(b, a, t);                // Situatsioon, kus järgmine sõna tuleb b massiivist
 
-		return t.toArray(new String[0]);	// Teisendab tulemuse massiiviks
+		return t.toArray(new String[0]);    // Teisendab tulemuse massiiviks
 	}
 
 	/**
@@ -69,13 +69,13 @@ class Kodu5b {
 	 * @param b Alles jäänud sõnad
 	 * @param t Seni moodustatud laused
 	 */
-	static void O(String[] a, String[] b, List t){
-		if (a.length == 1)						// Kui võetav sõna on oma massiivi viimane
-			t.add(a[0] + " " + String.join(" ", b));	// Lisatakse kõik ülejäänud sõnad hetke sõna järele
-		else for (String l : sonePoime(Arrays.copyOfRange(a, 1, a.length), b))		// Kui sõnad pole veel otsas, siis minnakse tagasi hargnemis funktsiooni
-			t.add(a[0] + " " + l);				// Lisatakse igale seni saadud lausele ette sõna, millest hargnemine alguse sai
+	static void O(String[] a, String[] b, List t) {
+		if (a.length == 1)                        // Kui võetav sõna on oma massiivi viimane
+			t.add(a[0] + " " + String.join(" ", b));    // Lisatakse kõik ülejäänud sõnad hetke sõna järele
+		else
+			for (String l : sonePoime(Arrays.copyOfRange(a, 1, a.length), b))        // Kui sõnad pole veel otsas, siis minnakse tagasi hargnemis funktsiooni
+				t.add(a[0] + " " + l);                // Lisatakse igale seni saadud lausele ette sõna, millest hargnemine alguse sai
 	}
-
 
 
 	public static void main(String[] args) {
