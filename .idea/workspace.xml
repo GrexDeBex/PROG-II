@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodutöö 6 250">
-      <change afterPath="$PROJECT_DIR$/src/Kodu7b.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodutöö 7">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tehtud/Kodu5b.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tehtud/Kodu5b.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Kodu7b.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kodu7b.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -274,7 +272,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680826160928</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Kodutöö 7">
+      <created>1680960862865</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1680960862865</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -312,6 +317,7 @@
     <MESSAGE value="Kodutöö 6 18" />
     <MESSAGE value="Kodutöö 6 73" />
     <MESSAGE value="Kodutöö 6 250" />
-    <option name="LAST_COMMIT_MESSAGE" value="Kodutöö 6 250" />
+    <MESSAGE value="Kodutöö 7" />
+    <option name="LAST_COMMIT_MESSAGE" value="Kodutöö 7" />
   </component>
 </project>
