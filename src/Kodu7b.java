@@ -1,111 +1,109 @@
-import java.util.Arrays;
+
 
 class Kodu7b {
 
-	public static long loendur;
-
 	public static long kuningad(int m, int n){
-		int[][] laud = new int[2*m][2*n];
-		int kuningaid = m*n;
+		int[][] laud = new int[m][n];
 
-		long tulemus = katsed(laud, kuningaid, 0, 0);
-
-
-
-		return tulemus;
+		return katsed(laud, 0, 0);
 	}
 
 
-	public static long katsed(int[][] laud, int kuningaid, int rida, int veerg){
+	public static long katsed(int[][] laud, int rida, int veerg){
 		int rida1 = rida;
 		int veerg1 = veerg;
 
 		if (veerg+1 == laud[0].length){
 			rida++;
 			veerg = 0;
-		}else {
+		}else
 			veerg++;
-		}
-
-
-
-		if (kuningaid == 0){
-			for (int[] ints : laud) {
-				System.out.println(Arrays.toString(ints));
-			}
-			System.out.println();
-			return 1;
-		}
-
-		if (rida == laud.length){
-			if (kuningaid == 1 && kontroll(laud, veerg1, rida1)){
-				return 1;
-			}
-
-			return 0;
-		}
 
 
 		long tulemus1 = 0;
-		if (kontroll(laud, veerg1, rida1)){
-			laud[rida1][veerg1] = 1;
-			tulemus1 = katsed(laud, kuningaid-1, rida, veerg);
-			laud[rida1][veerg1] = 0;
+		long tulemus2 = 0;
+		long tulemus3 = 0;
+		long tulemus4 = 0;
+
+		if (kontroll1(laud, rida1, veerg1)){
+			if (rida == laud.length){
+				tulemus1 = 1;
+			} else {
+				laud[rida1][veerg1] = 1;
+				tulemus1 = katsed(laud, rida, veerg);
+			}
 		}
 
-		long tulemus2 = katsed(laud, kuningaid, rida, veerg);
+		if (kontroll2(laud, rida1, veerg1)){
+			if (rida == laud.length){
+				tulemus2 = 1;
+			} else {
+				laud[rida1][veerg1] = 2;
+				tulemus2 = katsed(laud, rida, veerg);
+			}
+		}
 
-		return tulemus1+tulemus2;
+		if (kontroll3(laud, rida1, veerg1)){
+			if (rida == laud.length){
+				tulemus3 = 1;
+			} else {
+				laud[rida1][veerg1] = 3;
+				tulemus3 = katsed(laud, rida, veerg);
+			}
+		}
+		if (rida == laud.length){
+			tulemus4 = 1;
+		} else {
+			laud[rida1][veerg1] = 4;
+			tulemus4 = katsed(laud, rida, veerg);
+		}
 
+
+
+
+		return tulemus1 + tulemus2 + tulemus3 + tulemus4;
 	}
 
-	public static boolean kontroll(int[][] laud, int rida, int veerg){
-		if (veerg == 0 && rida == 0){
-			return true;
-		}
+	public static boolean kontroll1(int[][] laud, int rida, int veerg){
+		if (veerg > 0 && (laud[rida][veerg-1] == 2 || laud[rida][veerg-1] == 4))
+			return false;
 
-		try{
 
-			if (veerg == 0){
-				System.out.println(laud[rida - 1][veerg] != 1 && laud[rida - 1][veerg + 1] != 1);
-			}else
+		if (veerg > 0 && rida > 0 && laud[rida-1][veerg-1] == 4)
+			return false;
 
-			if (rida == 0){
-				System.out.println( laud[rida][veerg - 1] != 1);
-			}else
 
-			if (veerg == laud[0].length-1){
-				System.out.println(laud[rida - 1][veerg - 1] != 1 && laud[rida - 1][veerg] != 1 && laud[rida][veerg - 1] != 1);
-			}else
+		if (rida > 0 && (laud[rida-1][veerg] == 3 || laud[rida-1][veerg] == 4))
+			return false;
 
-				System.out.println( laud[rida - 1][veerg] != 1 && laud[rida][veerg - 1] != 1
-					&& laud[rida - 1][veerg - 1] != 1 && laud[rida - 1][veerg + 1] != 1);
 
-		}catch (Exception e){
-
-		}
-
-		if (veerg == 0){
-			return laud[rida - 1][veerg] != 1 && laud[rida - 1][veerg + 1] != 1;
-		}
-
-		if (rida == 0){
-			return laud[rida][veerg - 1] != 1;
-		}
-
-		if (veerg == laud[0].length-1){
-			return laud[rida - 1][veerg - 1] != 1 && laud[rida - 1][veerg] != 1 && laud[rida][veerg - 1] != 1;
-		}
-
-		return laud[rida - 1][veerg] != 1 && laud[rida][veerg - 1] != 1
-				&& laud[rida - 1][veerg - 1] != 1 && laud[rida - 1][veerg + 1] != 1;
+		return true;
 	}
+
+	public static boolean kontroll2(int[][] laud, int rida, int veerg){
+		if (rida > 0 && (laud[rida-1][veerg] == 3 || laud[rida-1][veerg] == 4))
+			return false;
+
+
+		if (veerg+1 < laud[veerg].length && rida > 0 && laud[rida-1][veerg+1] == 3)
+			return false;
+
+
+		return true;
+	}
+
+	public static boolean kontroll3(int[][] laud, int rida, int veerg){
+		if (veerg > 0 && (laud[rida][veerg-1] == 2 || laud[rida][veerg-1] == 4))
+			return false;
+
+		return true;
+	}
+
 
     public static void main(String[] args) {
 		long s = System.currentTimeMillis();
-		System.out.println(kuningad(3, 3));
+		System.out.println(kuningad(6, 4));
 		System.out.println(System.currentTimeMillis() - s);
-//		System.out.println(loendur);
 
     }//peameetod
 }//Kodu7b
