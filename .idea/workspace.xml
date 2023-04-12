@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodutöö 7 [10,9] 400">
+      <change afterPath="$PROJECT_DIR$/src/Kodu7bKoopia.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Kodu7b.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kodu7b.java" afterDir="false" />
     </list>
@@ -293,7 +294,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681080146939</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Kodutöö 7 [10,9] 400">
+      <created>1681317160921</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1681317160921</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

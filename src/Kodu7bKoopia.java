@@ -1,4 +1,4 @@
-class Kodu7b {
+class Kodu7bKoopia {
 
 	public static long kuningad(int m, int n) {
 		int[][] laud = new int[m][n];
@@ -22,10 +22,11 @@ class Kodu7b {
 		int ridaJargmine = rida;
 		int veergJargmine = veerg;
 
-		if (++veergJargmine == n) {
+		if (veergJargmine + 1 == n) {
 			ridaJargmine++;
 			veergJargmine = 0;
-		}
+		} else
+			veergJargmine++;
 
 
 
@@ -70,6 +71,7 @@ class Kodu7b {
 		boolean k3 = !k1_1;
 
 		boolean lopp = ridaJargmine == laud.length;
+
 
 		if (k1) {
 			if (lopp) tulemus1 = 1;
@@ -138,11 +140,11 @@ class Kodu7b {
 
 		long s = System.currentTimeMillis();
 
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < 50; i++) {
 			System.out.println(kuningad(10, 9));
 		}
 
-		System.out.println((System.currentTimeMillis() - s));
+		System.out.println((System.currentTimeMillis() - s) / 50.0);
 
 	}//peameetod
 }//Kodu7b
