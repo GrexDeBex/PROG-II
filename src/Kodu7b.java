@@ -15,6 +15,13 @@ class Kodu7b {
 
 
 	public static long katsed(int[][] laud, int rida, int veerg, long[][] ajalugu){
+		long s = System.nanoTime();
+		while (System.nanoTime() - s < 27000){
+			System.out.print(0);
+		}
+
+
+
 		int ridaJargmine = rida;
 		int veergJargmine = veerg;
 
@@ -108,11 +115,7 @@ class Kodu7b {
 			return false;
 
 
-		if (rida > 0 && (laud[rida-1][veerg] == 3 || laud[rida-1][veerg] == 4))
-			return false;
-
-
-		return true;
+		return rida <= 0 || (laud[rida - 1][veerg] != 3 && laud[rida - 1][veerg] != 4);
 	}
 
 	public static boolean kontroll2(int[][] laud, int rida, int veerg){
@@ -120,18 +123,11 @@ class Kodu7b {
 			return false;
 
 
-		if (veerg+1 < laud[veerg].length && rida > 0 && laud[rida-1][veerg+1] == 3)
-			return false;
-
-
-		return true;
+		return veerg + 1 >= laud[0].length || rida <= 0 || laud[rida - 1][veerg + 1] != 3;
 	}
 
 	public static boolean kontroll3(int[][] laud, int rida, int veerg){
-		if (veerg > 0 && (laud[rida][veerg-1] == 2 || laud[rida][veerg-1] == 4))
-			return false;
-
-		return true;
+		return veerg <= 0 || (laud[rida][veerg - 1] != 2 && laud[rida][veerg - 1] != 4);
 	}
 
 	public static int tetraToDec(int[] tetra){
@@ -150,7 +146,7 @@ class Kodu7b {
     public static void main(String[] args) {
 
 		long s = System.currentTimeMillis();
-		System.out.println(kuningad(10, 9));
+		System.out.println(kuningad(6, 4));
 		System.out.println(System.currentTimeMillis() - s);
 
     }//peameetod
