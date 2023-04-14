@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodutöö 7 [10,9] 400">
-      <change afterPath="$PROJECT_DIR$/src/Kodu7bKoopia.java" afterDir="false" />
+    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodutöö 7 [10,9] 280">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Kodu7b.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kodu7b.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Kodu7bKoopia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kodu7bKoopia.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -301,7 +301,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681317160921</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Kodutöö 7 [10,9] 280">
+      <created>1681336398243</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1681336398243</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -317,7 +324,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Initial commit" />
     <MESSAGE value="Kodu1a parandus" />
     <MESSAGE value="Organising" />
     <MESSAGE value="kodu 2a" />
@@ -342,6 +348,7 @@
     <MESSAGE value="Kodutöö 7" />
     <MESSAGE value="Kodutöö 7 [6,4]" />
     <MESSAGE value="Kodutöö 7 [10,9] 400" />
-    <option name="LAST_COMMIT_MESSAGE" value="Kodutöö 7 [10,9] 400" />
+    <MESSAGE value="Kodutöö 7 [10,9] 280" />
+    <option name="LAST_COMMIT_MESSAGE" value="Kodutöö 7 [10,9] 280" />
   </component>
 </project>
