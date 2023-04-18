@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodutöö 7 [10,9] 280">
+    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodutöö 7b [10,9] 120">
+      <change afterPath="$PROJECT_DIR$/src/Kodu7tärn.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Kodu7tärnKoopia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_09_04_2023_15_06_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_09_04_2023_15_06__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Kodu7b.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kodu7b.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Kodu7bKoopia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kodu7bKoopia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Kodu7b.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tehtud/Kodu7b.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -308,7 +311,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681336398243</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="Kodutöö 7b [10,9] 120">
+      <created>1681494421289</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1681494421289</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -324,7 +334,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Kodu1a parandus" />
     <MESSAGE value="Organising" />
     <MESSAGE value="kodu 2a" />
     <MESSAGE value="kodu 3b katse" />
@@ -349,6 +358,7 @@
     <MESSAGE value="Kodutöö 7 [6,4]" />
     <MESSAGE value="Kodutöö 7 [10,9] 400" />
     <MESSAGE value="Kodutöö 7 [10,9] 280" />
-    <option name="LAST_COMMIT_MESSAGE" value="Kodutöö 7 [10,9] 280" />
+    <MESSAGE value="Kodutöö 7b [10,9] 120" />
+    <option name="LAST_COMMIT_MESSAGE" value="Kodutöö 7b [10,9] 120" />
   </component>
 </project>
