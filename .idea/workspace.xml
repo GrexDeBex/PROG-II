@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodutöö 7* 102">
+    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="KT 2">
+      <change afterPath="$PROJECT_DIR$/src/Koopia.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Koopia2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Kodu7tärn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kodu7tärn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Kodu7tärnKoopia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Aeglane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Kt2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tehtud/Kt2.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -321,8 +325,26 @@
       <option name="project" value="LOCAL" />
       <updated>1681814468551</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="KT 2">
+      <created>1681894299408</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1681894299408</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -337,7 +359,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="kodu 2a" />
     <MESSAGE value="kodu 3b katse" />
     <MESSAGE value="kodu 3b 190mm" />
     <MESSAGE value="kodu 3b 69mm" />
@@ -362,6 +383,7 @@
     <MESSAGE value="Kodutöö 7 [10,9] 280" />
     <MESSAGE value="Kodutöö 7b [10,9] 120" />
     <MESSAGE value="Kodutöö 7* 102" />
-    <option name="LAST_COMMIT_MESSAGE" value="Kodutöö 7* 102" />
+    <MESSAGE value="KT 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="KT 2" />
   </component>
 </project>
