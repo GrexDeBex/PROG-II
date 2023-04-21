@@ -5,16 +5,8 @@ class Kodu7tärn {
 	public static int ostmisViisid(double[] a, double p){
 		quicksort(a, 0, a.length-1);
 
-		int i = 0;
-		for (; i < a.length; i++)
-			if (a[i] > p)
-				break;
-		double[] tooted = new double[i];
-		System.arraycopy(a, 0, tooted, 0, tooted.length);
-
-		int tulemus = Aeglane.ostmisViisid(a, p);
-//		int tulemus = funk(tooted, p, tooted.length-1);
-
+//		int tulemus = Aeglane.ostmisViisid(a, p);
+		int tulemus = funk(a, p, a.length-1);
 
 		if (tulemus == 0)
 			return 1;
@@ -25,19 +17,25 @@ class Kodu7tärn {
 
 	public static int funk(double[] tooted, double jaak, int indeks){
 		int tulemus = 1;
-		for (; indeks > 1; indeks--) {
+		for (; indeks > 2; indeks--) {
 			double uusJaak = jaak - tooted[indeks];
 
 			if (uusJaak < tooted[0])
 				tulemus += (uusJaak < 0) ? 0 : 1;
 			else
 				tulemus += funk(tooted, uusJaak, indeks);
-
 		}
 
 		if (tooted.length > 1)
 			tulemus += (int) (jaak / tooted[1]);
 
+		if (tooted.length > 2){
+			int piir = (int) (jaak / tooted[2]);
+			tulemus += piir;
+			for (int i = 1; i <= piir; i++) {
+				tulemus += (int) ((jaak - tooted[2]*i)  / tooted[1]);
+			}
+		}
 
 		return tulemus;
 	}
@@ -83,19 +81,21 @@ class Kodu7tärn {
 	}
 
 	public static void main(String[] args) {
+		long s = System.currentTimeMillis();
 
 		Random generator = new Random(15);
-		long s = System.currentTimeMillis();
 
 		double[] a = new double[25];
 		for (int i = 0; i < a.length; i++)
 			a[i] = generator.nextDouble()*100;
 
 		double p = 500;
-		for (int i = 0; i < 1; i++) {
+
+
+		for (int i = 0; i < 100; i++)
 			System.out.println(ostmisViisid(a, p));
-		}
-		System.out.println(559126819);
+
+//		System.out.println(559126819);
 		System.out.println();
 
 		System.out.println(System.currentTimeMillis() - s);

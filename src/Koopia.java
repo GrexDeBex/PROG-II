@@ -2,29 +2,22 @@ import java.util.Random;
 
 class Koopia {
 
-	public static int loendur;
-
-//	public static int ostmisViisid(double[] a, double p){
-//		return Kodu7tärnKoopia.ostmisViisid(a, p);
-//	}
-
 	public static int ostmisViisid(double[] a, double p){
-
-
 		quicksort(a, 0, a.length-1);
 
 		int i = 0;
 		for (; i < a.length; i++)
 			if (a[i] > p)
 				break;
-
 		double[] tooted = new double[i];
 		System.arraycopy(a, 0, tooted, 0, tooted.length);
 
+//		int tulemus = Aeglane.ostmisViisid(a, p);
 		int tulemus = funk(tooted, p, tooted.length-1);
+
+
 		if (tulemus == 0)
 			return 1;
-
 
 		return tulemus;
 	}
@@ -32,22 +25,18 @@ class Koopia {
 
 	public static int funk(double[] tooted, double jaak, int indeks){
 		int tulemus = 1;
-		for (; indeks > 0; indeks--) {
+		for (; indeks > 1; indeks--) {
 			double uusJaak = jaak - tooted[indeks];
 
-
-			int voimalused;
-			if (uusJaak < 0){
-				voimalused = 0;
-			}else if (uusJaak < tooted[0]){
-				voimalused = 1;
-			}else{
-				voimalused = funk(tooted, uusJaak, indeks);
-			}
-			tulemus += voimalused;
-
+			if (uusJaak < tooted[0])
+				tulemus += (uusJaak < 0) ? 0 : 1;
+			else
+				tulemus += funk(tooted, uusJaak, indeks);
 
 		}
+
+		if (tooted.length > 1)
+			tulemus += (int) (jaak / tooted[1]);
 
 
 		return tulemus;
@@ -94,9 +83,9 @@ class Koopia {
 	}
 
 	public static void main(String[] args) {
+		long s = System.currentTimeMillis();
 
 		Random generator = new Random(15);
-		long s = System.currentTimeMillis();
 
 		double[] a = new double[25];
 		for (int i = 0; i < a.length; i++)
@@ -104,12 +93,13 @@ class Koopia {
 
 		double p = 500;
 
-		System.out.println(ostmisViisid(a, p));
-		System.out.println(559126819);
+
+		for (int i = 0; i < 100; i++) {
+			System.out.println(ostmisViisid(a, p));
+		}
+//		System.out.println(559126819);
 		System.out.println();
 
-
-		System.out.println(loendur);
 		System.out.println(System.currentTimeMillis() - s);
 	}
 

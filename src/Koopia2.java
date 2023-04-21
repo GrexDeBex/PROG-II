@@ -25,7 +25,6 @@ class Koopia2 {
 		int tulemus;
 //		tulemus = Aeglane.ostmisViisid(a, p);
 
-		System.out.println(funk(tooted, p, tooted.length-1));
 		tulemus = funk(tooted, p, tooted.length-1 ,kombinatsioon, ajalugu, 0);
 
 
@@ -58,7 +57,7 @@ class Koopia2 {
 					if (kombinatsioon[1] < kombinatsioon[0]){
 						uusJaak = uusJaak + tooted[kombinatsioon[0]] - tooted[kombinatsioon[0]-1];
 						if (uusJaak >= 0)
-							ajalugu[0] += funk(tooted, uusJaak, indeks) - voimalused;
+							ajalugu[0] += Kodu7tärn.funk(tooted, uusJaak, indeks) - voimalused;
 
 					}
 
@@ -82,26 +81,6 @@ class Koopia2 {
 	}
 
 
-	public static int funk(double[] tooted, double jaak, int indeks){
-		int tulemus = 1;
-		for (; indeks > 0; indeks--) {
-			double uusJaak = jaak - tooted[indeks];
-
-
-			int voimalused;
-			if (uusJaak < 0){
-				voimalused = 0;
-			}else if (uusJaak < tooted[0]){
-				voimalused = 1;
-			}else{
-				voimalused = funk(tooted, uusJaak, indeks);
-			}
-			tulemus += voimalused;
-		}
-
-
-		return tulemus;
-	}
 
 
 
@@ -149,7 +128,7 @@ class Koopia2 {
 		Random generator = new Random(15);
 		long s = System.currentTimeMillis();
 
-		double[] a = new double[10];
+		double[] a = new double[25];
 		for (int i = 0; i < a.length; i++)
 			a[i] = generator.nextDouble()*100;
 
@@ -324,21 +303,6 @@ class Koopia3 {
 		}
 	}
 
-	public static void main(String[] args) {
-
-		Random generator = new Random(15);
-		long s = System.currentTimeMillis();
-
-		double[] a = new double[25];
-		for (int i = 0; i < a.length; i++)
-			a[i] = generator.nextDouble()*100;
-
-		double p = 500;
-
-		System.out.println(ostmisViisid(a, p));
-
-		System.out.println(System.currentTimeMillis() - s);
-	}
 
 }
 
