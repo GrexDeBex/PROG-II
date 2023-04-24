@@ -1,4 +1,4 @@
-/***********************************
+package Tehtud; /***********************************
  * Programmeerimine II. LTAT.03.007
  * 2022/2023 kevadsemester
  *
