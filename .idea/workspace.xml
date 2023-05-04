@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodu 7* 4.4ms">
+    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodu 7*">
+      <change afterPath="$PROJECT_DIR$/src/Aeglane.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Kodu8.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Koopia.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -348,7 +351,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682081394505</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Kodu 7*">
+      <created>1682350808269</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1682350808269</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -375,7 +385,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="kodu 3b 69mm" />
     <MESSAGE value="Kodu 4a 1s" />
     <MESSAGE value="Kodu 4a 30mm" />
     <MESSAGE value="Kodu 4a 26ms" />
@@ -400,6 +409,7 @@
     <MESSAGE value="KT 2" />
     <MESSAGE value="Kodu 7* 5.2ms" />
     <MESSAGE value="Kodu 7* 4.4ms" />
-    <option name="LAST_COMMIT_MESSAGE" value="Kodu 7* 4.4ms" />
+    <MESSAGE value="Kodu 7*" />
+    <option name="LAST_COMMIT_MESSAGE" value="Kodu 7*" />
   </component>
 </project>
