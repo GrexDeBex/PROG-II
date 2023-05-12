@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodutöö 7">
-      <change afterPath="$PROJECT_DIR$/andmed.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Kodu9a.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Voistleja.java" afterDir="false" />
+    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodu 8 24 600ms">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Aeglane.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Kodu8.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kodu8.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Koopia.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,15 +36,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "jdk.selected.JAVA_MODULE": "openjdk-19",
+    "run.code.analysis.last.selected.profile": "aDefault",
+    "settings.editor.selected.configurable": "inlay.hints"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\ramma\Documents\Java\PROG-II\src\Tehtud" />
@@ -351,7 +352,21 @@
       <option name="project" value="LOCAL" />
       <updated>1682081394505</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Kodu 7*">
+      <created>1682350808269</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1682350808269</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Kodu 8 24 600ms">
+      <created>1683232105720</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1683232105720</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -378,8 +393,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="kodu 3b 69mm" />
-    <MESSAGE value="Kodu 4a 1s" />
     <MESSAGE value="Kodu 4a 30mm" />
     <MESSAGE value="Kodu 4a 26ms" />
     <MESSAGE value="Kodu 4a 10.4ms" />
@@ -403,6 +416,8 @@
     <MESSAGE value="KT 2" />
     <MESSAGE value="Kodu 7* 5.2ms" />
     <MESSAGE value="Kodu 7* 4.4ms" />
-    <option name="LAST_COMMIT_MESSAGE" value="Kodu 7* 4.4ms" />
+    <MESSAGE value="Kodu 7*" />
+    <MESSAGE value="Kodu 8 24 600ms" />
+    <option name="LAST_COMMIT_MESSAGE" value="Kodu 8 24 600ms" />
   </component>
 </project>
