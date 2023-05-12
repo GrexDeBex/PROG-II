@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodu 7* 4.4ms">
+    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodutöö 7">
+      <change afterPath="$PROJECT_DIR$/andmed.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Kodu9a.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Voistleja.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
