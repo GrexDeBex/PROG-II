@@ -4,11 +4,26 @@ import java.util.*;
 
 public class Kodu10b {
 	public static String[] lühimTuletus(String[] sonad, String ls, String ss) {
+		if (ls.equals(ss))
+			return new String[]{ls};
+
+		boolean puudub = true;
+		for (String sona : sonad)
+			if (onTuletis(sona, ss))
+				puudub = false;
+
+		if (puudub)
+			return null;
+
 		ArrayList<String> luhim = new ArrayList<>(Collections.nCopies(1000, "0"));
 		ArrayList<String> jada = new ArrayList<>();
 
+
 		jada.add(ls);
 		rek(sonad, ls, ss, luhim, jada);
+
+		if (luhim.get(0).equals("0"))
+			return null;
 
 		return luhim.toArray(new String[0]);
 	}
@@ -20,7 +35,9 @@ public class Kodu10b {
 			return;
 
 		for (String sona : sonad) {
-			if (onTuletis(ls, sona) && sona.equals(ss)) {
+			boolean tuletis = onTuletis(ls, sona);
+
+			if (tuletis && sona.equals(ss)) {
 				jada.add(ss);
 				if (luhim.size() > jada.size()){
 					luhim.clear();
@@ -30,12 +47,26 @@ public class Kodu10b {
 				break;
 			}
 
-			if (onTuletis(ls, sona) && !jada.contains(sona)){
+			if (tuletis && !jada.contains(sona) && heaValik(ls, sona, ss)){
 				jada.add(sona);
 				rek(sonad, sona, ss, luhim, jada);
 				jada.remove(sona);
 			}
 		}
+	}
+
+	public static boolean heaValik(String ls, String sona, String ss){
+		int loendur1 = 0;
+		for (int i = 0; i < 4; i++)
+			if (ls.charAt(i) == ss.charAt(i))
+				loendur1++;
+
+		int loendur2 = 0;
+		for (int i = 0; i < 4; i++)
+			if (sona.charAt(i) == ss.charAt(i))
+				loendur2++;
+
+		return loendur1 <= loendur2;
 	}
 
 
@@ -62,12 +93,22 @@ public class Kodu10b {
 		return sonad.toArray(new String[0]);
 	}
 
-	//BOONUSÜLESANNE
-	public static String[] pikimLühimTuletus(String[] sõnad){
-		throw new UnsupportedOperationException("Kirjuta oma lahendus selle rea asemele. Juhul kui ülesanne jääb lahendamata jäta see rida alles.");
+
+	public static String[] pikimLühimTuletus(String[] sonad){
+		String[] tulemus = new String[0];
+		for (String ls : sonad) {
+			for (String ss : sonad) {
+				String[] tuletus = lühimTuletus(sonad, ls, ss);
+
+				if (tuletus != null && tuletus.length > tulemus.length)
+					tulemus = tuletus;
+			}
+		}
+
+		return tulemus;
 	}
 
 	public static void main(String[] args) {
-		System.out.println(Arrays.toString(lühimTuletus(sõnad("nimi.txt"), "kass", "kakk")));
+		System.out.println(Arrays.toString(pikimLühimTuletus(sõnad("nimi.txt"))));
 	}
 }
