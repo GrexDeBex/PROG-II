@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodutöö 9a">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_03_2023_21_38__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_03_2023_21_38__Changes_.xml" afterDir="false" />
+    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodu 10b">
+      <change afterPath="$PROJECT_DIR$/src/Kodu10bUL1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/koopia.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nimi.txt" beforeDir="false" afterPath="$PROJECT_DIR$/nimi.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Kodu10b.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kodu10b.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -372,7 +374,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683916427912</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Kodu 10b">
+      <created>1684324335422</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1684324335422</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -399,7 +408,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Kodu 4a 26ms" />
     <MESSAGE value="Kodu 4a 10.4ms" />
     <MESSAGE value="Kodu 4a 8.6ms" />
     <MESSAGE value="Kodu 4a 7.5ms" />
@@ -424,6 +432,7 @@
     <MESSAGE value="Kodu 7*" />
     <MESSAGE value="Kodu 8 24 600ms" />
     <MESSAGE value="Kodutöö 9a" />
-    <option name="LAST_COMMIT_MESSAGE" value="Kodutöö 9a" />
+    <MESSAGE value="Kodu 10b" />
+    <option name="LAST_COMMIT_MESSAGE" value="Kodu 10b" />
   </component>
 </project>

@@ -1,75 +1,49 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.*;
 
 public class Kodu10b {
 	public static String[] lühimTuletus(String[] sonad, String ls, String ss) {
-		if (ls.equals(ss))
-			return new String[]{ls};
-
-		boolean puudub = true;
-		for (String sona : sonad)
-			if (onTuletis(sona, ss))
-				puudub = false;
-
-		if (puudub)
-			return null;
-
-		ArrayList<String> luhim = new ArrayList<>(Collections.nCopies(1000, "0"));
-		ArrayList<String> jada = new ArrayList<>();
-
-
-		jada.add(ls);
-		rek(sonad, ls, ss, luhim, jada);
-
-		if (luhim.get(0).equals("0"))
-			return null;
-
-		return luhim.toArray(new String[0]);
+		return Kodu10bUL1.lühimTuletus(sonad, ls, ss);
+	}
+	public static String[] sõnad(String failinimi){
+		return Kodu10bUL1.sõnad(failinimi);
 	}
 
-	public static void rek(String[] sonad, String ls, String ss,
-				ArrayList<String> luhim, ArrayList<String> jada){
 
-		if (luhim.size() == jada.size())
-			return;
 
-		for (String sona : sonad) {
-			boolean tuletis = onTuletis(ls, sona);
 
-			if (tuletis && sona.equals(ss)) {
-				jada.add(ss);
-				if (luhim.size() > jada.size()){
-					luhim.clear();
-					luhim.addAll(jada);
-				}
-				jada.remove(ss);
-				break;
-			}
 
-			if (tuletis && !jada.contains(sona) && heaValik(ls, sona, ss)){
-				jada.add(sona);
-				rek(sonad, sona, ss, luhim, jada);
-				jada.remove(sona);
+	public static String[] pikimLühimTuletus(String[] sonad){
+		String[] tulemus = {sonad[0]};
+		HashMap<String, HashSet<String>> seosed = seosed(sonad);
+
+		for (int i = 0; i < sonad.length; i++) {
+			for (int j = i+1; j < sonad.length; j++) {
+
+//				int pikkus = minimaalneJadaPikkus(seosed, sonad[i], sonad[j]);
+//				if (pikkus <= tulemus.length)
+//					continue;
+//
+//				tulemus = luhim(seosed, sonad[i], sonad[j], pikkus);
 			}
 		}
+
+		return tulemus;
 	}
 
-	public static boolean heaValik(String ls, String sona, String ss){
-		int loendur1 = 0;
-		for (int i = 0; i < 4; i++)
-			if (ls.charAt(i) == ss.charAt(i))
-				loendur1++;
+	public static HashMap<String, HashSet<String>> seosed(String[] sonad){
+		HashMap<String, HashSet<String>> seosed = new HashMap<>();
+		for (String sona1 : sonad) {
+			HashSet<String> seos = new HashSet<>();
 
-		int loendur2 = 0;
-		for (int i = 0; i < 4; i++)
-			if (sona.charAt(i) == ss.charAt(i))
-				loendur2++;
+			for (String sona2 : sonad)
+				if (onTuletis(sona1, sona2))
+					seos.add(sona2);
 
-		return loendur1 <= loendur2;
+			seosed.put(sona1, seos);
+		}
+
+		return seosed;
 	}
-
-
 
 	public static boolean onTuletis(String s1, String s2){
 		int loendur = 0;
@@ -80,35 +54,110 @@ public class Kodu10b {
 		return loendur == 3;
 	}
 
-	public static String[] sõnad(String failinimi){
-		ArrayList<String> sonad = new ArrayList<>();
-		try (Scanner sc = new Scanner(new File(failinimi))) {
-			while (sc.hasNextLine())
-				sonad.add(sc.nextLine());
 
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException(e);
+	public static int minimaalneJadaPikkus(HashMap<String, HashSet<String>> seosed, String algus, String lopp){
+		HashSet<String> koikSonad = new HashSet<>(seosed.get(algus));
+		ArrayList<HashSet<String>> liikmed = new ArrayList<>();
+		liikmed.add(new HashSet<>(Collections.singleton(algus)));
+		liikmed.add(new HashSet<>(seosed.get(algus)));
+
+		boolean loppLeitud = false;
+		int loendur = 2;
+
+		tsukkel:
+		while (true){
+			HashSet<String> liige = new HashSet<>();
+
+			for (String sona : liikmed.get(loendur - 1)) {
+				if (sona.equals(lopp)) {
+					loppLeitud = true;
+					break tsukkel;
+				}
+
+				liige.addAll(seosed.get(sona));
+			}
+			liige.removeAll(koikSonad);
+			liikmed.add(liige);
+			if (!koikSonad.addAll(liige))
+				break;
+
+			loendur++;
 		}
 
-		return sonad.toArray(new String[0]);
+		liikmed.set(loendur-1, new HashSet<>(Collections.singleton(lopp)));
+
+
+		for (int i = liikmed.size()-1; i > 1; i--) {
+			HashSet<String> liige1 = liikmed.get(i);
+			HashSet<String> liige2 = liikmed.get(i-1);
+			HashSet<String> uusLiige = new HashSet<>();
+
+			for (String sona : liige1)
+				uusLiige.addAll(seosed.get(sona));
+
+			liige2.retainAll(uusLiige);
+		}
+		for (HashSet<String> strings : liikmed) {
+			System.out.println(strings);
+		}
+
+		if (loppLeitud)
+			return loendur;
+		else
+			return -1;
 	}
 
 
-	public static String[] pikimLühimTuletus(String[] sonad){
-		String[] tulemus = new String[0];
-		for (String ls : sonad) {
-			for (String ss : sonad) {
-				String[] tuletus = lühimTuletus(sonad, ls, ss);
+	public static String[] luhim(HashMap<String, HashSet<String>> seosed, String ls, String ss, int pikkus) {
+		ArrayList<String> luhim = new ArrayList<>();
+		ArrayList<String> jada = new ArrayList<>();
 
-				if (tuletus != null && tuletus.length > tulemus.length)
-					tulemus = tuletus;
+		jada.add(ls);
+		rek(seosed, ls, ss, luhim, jada, pikkus);
+
+		return luhim.toArray(new String[0]);
+	}
+
+	public static void rek(HashMap<String, HashSet<String>> seosed, String ls, String ss,
+							  ArrayList<String> luhim, ArrayList<String> jada, int pikkus){
+
+		if (jada.size() == pikkus)
+			return;
+
+		for (String sona : seosed.get(ls)) {
+
+			if (sona.equals(ss)) {
+				luhim.addAll(jada);
+				luhim.add(ss);
+				return;
+			}
+
+			if (!jada.contains(sona)){
+				jada.add(sona);
+				rek(seosed, sona, ss, luhim, jada, pikkus);
+				jada.remove(sona);
+				if (luhim.size() == pikkus)
+					return;
 			}
 		}
-
-		return tulemus;
 	}
 
+
+
+
+
+
+
+
+
+
+
 	public static void main(String[] args) {
-		System.out.println(Arrays.toString(pikimLühimTuletus(sõnad("nimi.txt"))));
+//		System.out.println(Arrays.toString(pikimLühimTuletus(sõnad("nimi.txt"))));
+
+
+		HashMap<String, HashSet<String>> seosed = seosed(sõnad("nimi.txt"));
+
+		System.out.println(minimaalneJadaPikkus(seosed, "heli", "haud"));
 	}
 }
