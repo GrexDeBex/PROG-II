@@ -14,137 +14,93 @@ public class Kodu10b {
 
 	public static String[] pikimLühimTuletus(String[] sonad){
 		String[] tulemus = {sonad[0]};
-		HashMap<String, HashSet<String>> seosed = seosed(sonad);
+		HashMap<String, HashSet<String>> seosed = Kodu10bUL1.seosed(sonad);
+		for (String sona : sonad) {
+			if (seosed.get(sona).size() != 1)
+				continue;
 
-		for (int i = 0; i < sonad.length; i++) {
-			for (int j = i+1; j < sonad.length; j++) {
+			String[] tuletus = minimaalneJadaPikkus(seosed, sona, tulemus.length);
 
-//				int pikkus = minimaalneJadaPikkus(seosed, sonad[i], sonad[j]);
-//				if (pikkus <= tulemus.length)
-//					continue;
-//
-//				tulemus = luhim(seosed, sonad[i], sonad[j], pikkus);
-			}
+			if (tuletus.length > tulemus.length)
+				tulemus = tuletus;
 		}
 
 		return tulemus;
 	}
 
-	public static HashMap<String, HashSet<String>> seosed(String[] sonad){
-		HashMap<String, HashSet<String>> seosed = new HashMap<>();
-		for (String sona1 : sonad) {
-			HashSet<String> seos = new HashSet<>();
-
-			for (String sona2 : sonad)
-				if (onTuletis(sona1, sona2))
-					seos.add(sona2);
-
-			seosed.put(sona1, seos);
-		}
-
-		return seosed;
-	}
-
-	public static boolean onTuletis(String s1, String s2){
-		int loendur = 0;
-		for (int i = 0; i < 4; i++)
-			if (s1.charAt(i) == s2.charAt(i))
-				loendur++;
-
-		return loendur == 3;
-	}
 
 
-	public static int minimaalneJadaPikkus(HashMap<String, HashSet<String>> seosed, String algus, String lopp){
+	public static String[] minimaalneJadaPikkus(HashMap<String, HashSet<String>> seosed, String algus, int pikkus){
 		HashSet<String> koikSonad = new HashSet<>(seosed.get(algus));
+		koikSonad.add(algus);
+
 		ArrayList<HashSet<String>> liikmed = new ArrayList<>();
 		liikmed.add(new HashSet<>(Collections.singleton(algus)));
 		liikmed.add(new HashSet<>(seosed.get(algus)));
 
-		boolean loppLeitud = false;
-		int loendur = 2;
 
-		tsukkel:
 		while (true){
 			HashSet<String> liige = new HashSet<>();
 
-			for (String sona : liikmed.get(loendur - 1)) {
-				if (sona.equals(lopp)) {
-					loppLeitud = true;
-					break tsukkel;
-				}
-
+			for (String sona : liikmed.get(liikmed.size()-1))
 				liige.addAll(seosed.get(sona));
-			}
+
 			liige.removeAll(koikSonad);
-			liikmed.add(liige);
-			if (!koikSonad.addAll(liige))
+			if (liige.size() == 0)
 				break;
 
-			loendur++;
+			liikmed.add(liige);
+			koikSonad.addAll(liige);
 		}
 
-		liikmed.set(loendur-1, new HashSet<>(Collections.singleton(lopp)));
+		if (liikmed.size() < pikkus)
+			return new String[0];
 
+		String lopp = "";
+		for (String s : liikmed.get(liikmed.size() - 1)) {
+			lopp = s;
+			break;
+		}
+
+
+		liikmed.set(liikmed.size()-1, new HashSet<>(Collections.singleton(lopp)));
+		HashSet<String> uusLiige = new HashSet<>();
 
 		for (int i = liikmed.size()-1; i > 1; i--) {
+			uusLiige.clear();
 			HashSet<String> liige1 = liikmed.get(i);
 			HashSet<String> liige2 = liikmed.get(i-1);
-			HashSet<String> uusLiige = new HashSet<>();
 
 			for (String sona : liige1)
 				uusLiige.addAll(seosed.get(sona));
 
 			liige2.retainAll(uusLiige);
 		}
-		for (HashSet<String> strings : liikmed) {
-			System.out.println(strings);
-		}
 
-		if (loppLeitud)
-			return loendur;
-		else
-			return -1;
+		String[] tulemus = new String[liikmed.size()];
+		tulemus[0] = algus;
+		tulemus[tulemus.length-1] = lopp;
+
+		leiaJada(tulemus, liikmed, 1);
+
+		return tulemus;
 	}
 
 
-	public static String[] luhim(HashMap<String, HashSet<String>> seosed, String ls, String ss, int pikkus) {
-		ArrayList<String> luhim = new ArrayList<>();
-		ArrayList<String> jada = new ArrayList<>();
+	public static boolean leiaJada(String[] jada, ArrayList<HashSet<String>> liikmed, int indeks){
+		if (indeks == jada.length-1)
+			return true;
 
-		jada.add(ls);
-		rek(seosed, ls, ss, luhim, jada, pikkus);
-
-		return luhim.toArray(new String[0]);
-	}
-
-	public static void rek(HashMap<String, HashSet<String>> seosed, String ls, String ss,
-							  ArrayList<String> luhim, ArrayList<String> jada, int pikkus){
-
-		if (jada.size() == pikkus)
-			return;
-
-		for (String sona : seosed.get(ls)) {
-
-			if (sona.equals(ss)) {
-				luhim.addAll(jada);
-				luhim.add(ss);
-				return;
-			}
-
-			if (!jada.contains(sona)){
-				jada.add(sona);
-				rek(seosed, sona, ss, luhim, jada, pikkus);
-				jada.remove(sona);
-				if (luhim.size() == pikkus)
-					return;
+		for (String sona : liikmed.get(indeks)) {
+			if (Kodu10bUL1.onTuletis(jada[indeks-1], sona)){
+				jada[indeks] = sona;
+				if (leiaJada(jada, liikmed, indeks+1))
+					return true;
 			}
 		}
+
+		return false;
 	}
-
-
-
-
 
 
 
@@ -153,11 +109,11 @@ public class Kodu10b {
 
 
 	public static void main(String[] args) {
-//		System.out.println(Arrays.toString(pikimLühimTuletus(sõnad("nimi.txt"))));
+		long s = System.currentTimeMillis();
+		System.out.println(Arrays.toString(pikimLühimTuletus(sõnad("nimi.txt"))));
+		System.out.println(System.currentTimeMillis() - s);
 
-
-		HashMap<String, HashSet<String>> seosed = seosed(sõnad("nimi.txt"));
-
-		System.out.println(minimaalneJadaPikkus(seosed, "heli", "haud"));
+//		HashMap<String, HashSet<String>> seosed = Kodu10bUL1.seosed(sõnad("nimi.txt"));
+//		System.out.println(seosed.get("segu"));
 	}
 }

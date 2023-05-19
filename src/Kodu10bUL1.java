@@ -1,8 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
+import java.util.*;
 
 public class Kodu10bUL1 {
 	public static String[] lühimTuletus(String[] sonad, String ls, String ss) {
@@ -93,5 +91,20 @@ public class Kodu10bUL1 {
 		}
 
 		return sonad.toArray(new String[0]);
+	}
+
+
+	public static HashMap<String, HashSet<String>> seosed(String[] sonad){
+		HashMap<String, HashSet<String>> seosed = new HashMap<>();
+		for (String sona1 : sonad) {
+			HashSet<String> seos = new HashSet<>();
+			for (String sona2 : sonad)
+				if (onTuletis(sona1, sona2))
+					seos.add(sona2);
+
+			seosed.put(sona1, seos);
+		}
+
+		return seosed;
 	}
 }
