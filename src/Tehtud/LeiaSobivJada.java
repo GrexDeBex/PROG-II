@@ -1,3 +1,7 @@
+package Tehtud;
+
+import Tehtud.Kodu10b;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;

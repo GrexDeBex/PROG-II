@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodutöö 10b 31">
-      <change afterPath="$PROJECT_DIR$/src/LeiaSobivJada.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Kt3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2023_20_14__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2023_20_14__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Kodu10b.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kodu10b.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Kodu10bUL1.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/koopia.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nimi.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tehtud/nimi.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Kodu10b.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tehtud/Kodu10b.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LeiaSobivJada.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tehtud/LeiaSobivJada.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,20 +38,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;aDefault&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "jdk.selected.JAVA_MODULE": "openjdk-19",
+    "last.edited.regexp": "Sample Text",
+    "run.code.analysis.last.selected.profile": "aDefault",
+    "settings.editor.selected.configurable": "inlay.hints"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\ramma\Documents\Java\PROG-II" />
       <recent name="C:\Users\ramma\Documents\Java\PROG-II\src\Tehtud" />
+      <recent name="C:\Users\ramma\Documents\Java\PROG-II" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="" />
