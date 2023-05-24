@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodutöö 10b 31">
-      <change afterPath="$PROJECT_DIR$/src/Kt3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2023_20_14__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_05_2023_20_14__Changes_.xml" afterDir="false" />
+    <list default="true" id="0163bd48-cd6f-451f-b10a-6b3378c048ec" name="Changes" comment="Kodu KT3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nimi.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tehtud/nimi.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Kodu10b.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tehtud/Kodu10b.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LeiaSobivJada.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tehtud/LeiaSobivJada.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Kt3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kt3.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,17 +34,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "jdk.selected.JAVA_MODULE": "openjdk-19",
-    "last.edited.regexp": "Sample Text",
-    "run.code.analysis.last.selected.profile": "aDefault",
-    "settings.editor.selected.configurable": "inlay.hints"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19&quot;,
+    &quot;last.edited.regexp&quot;: &quot;Sample Text&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;aDefault&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\ramma\Documents\Java\PROG-II\src\Tehtud" />
@@ -390,7 +386,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684487544095</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="Kodu KT3">
+      <created>1684917747057</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1684917747057</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -417,7 +420,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Kodu 4a 8.6ms" />
     <MESSAGE value="Kodu 4a 7.5ms" />
     <MESSAGE value="Kodu 4a 7.8ms" />
     <MESSAGE value="Kodu 4a 3.99ms" />
@@ -442,6 +444,7 @@
     <MESSAGE value="Kodutöö 9a" />
     <MESSAGE value="Kodu 10b" />
     <MESSAGE value="Kodutöö 10b 31" />
-    <option name="LAST_COMMIT_MESSAGE" value="Kodutöö 10b 31" />
+    <MESSAGE value="Kodu KT3" />
+    <option name="LAST_COMMIT_MESSAGE" value="Kodu KT3" />
   </component>
 </project>

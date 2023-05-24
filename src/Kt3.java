@@ -75,6 +75,8 @@ public class Kt3 {
 			}
 		}
 
+		if (max == 0)
+			return null;
 
 		return tulemus;
 	}
